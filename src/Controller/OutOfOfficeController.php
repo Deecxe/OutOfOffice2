@@ -30,4 +30,71 @@ class OutOfOfficeController extends AbstractController
             
         ]);
     }
+
+    //--------------------------Options--------------------------------------
+    /**
+     * @Route("/options", name="options")
+     */
+    public function options(): Response
+    {
+        return $this->render('out_of_office/options.html.twig', [
+            'controller_name' => 'OutOfOfficeController',
+            
+        ]);
+    }
+    //--------------------------Modifier reservation--------------------------------------
+    /**
+     * @Route("/options/modifierReservation", name="modifierReservation")
+     */
+    public function modifierReservation(): Response
+    {
+        return $this->render('out_of_office/modifierReservation.html.twig', [
+            'controller_name' => 'OutOfOfficeController',
+            
+        ]);
+    }
+    //--------------------------Annuler une réservation--------------------------------------
+    /**
+     * @Route("/options/annulerReservation", name="annulerReservation")
+     */
+    public function annulerReservation(): Response
+    {
+        return $this->render('out_of_office/annulerReservation.html.twig', [
+            'controller_name' => 'OutOfOfficeController',
+            
+        ]);
+    }
+    //--------------------------Consulter factures reçues--------------------------------------
+    /**
+     * @Route("/options/consulterFactures", name="consulterFactures")
+     */
+    public function consulterFactures(): Response
+    {
+        return $this->render('out_of_office/consulterFactures.html.twig', [
+            'controller_name' => 'OutOfOfficeController',
+            
+        ]);
+    }
+    //--------------------------Modifier mon profil--------------------------------------
+    /**
+     * @Route("/options/modifierProfil", name="modifierProfil")
+     */
+    public function modifierProfil(): Response
+    {
+        return $this->render('out_of_office/modifierProfil.html.twig', [
+            'controller_name' => 'OutOfOfficeController',
+            
+        ]);
+    }
+    //--------------------------Deconnexion--------------------------------------
+    /**
+     * @Route("/deconnexion", name="deconnexion")
+     */
+    public function deconnexion(): Response
+    {
+        return $this->render('out_of_office/deconnexion.html.twig', [
+            'controller_name' => 'OutOfOfficeController',
+            
+        ]);
+    }
 }
