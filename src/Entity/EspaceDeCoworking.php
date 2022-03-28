@@ -77,6 +77,16 @@ class EspaceDeCoworking
      */
     private $nombrePlaceLibre;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $longitude;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +232,30 @@ class EspaceDeCoworking
     public function setNombrePlaceLibre(int $nombrePlaceLibre): self
     {
         $this->nombrePlaceLibre = $nombrePlaceLibre;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

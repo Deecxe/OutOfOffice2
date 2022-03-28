@@ -5,7 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\EspaceDeCoworking;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -140,7 +139,7 @@ class OutOfOfficeController extends AbstractController
 
         ->getForm();
 
-        $formulaireEspace->handleRequest($request);
+        $formulaireEspace->handleRequest($request); 
 
         if( $formulaireEspace->isSubmitted()  && $formulaireEspace->isValid())
         {
@@ -152,6 +151,47 @@ class OutOfOfficeController extends AbstractController
 
         $vueFormulaireEspace=$formulaireEspace->createView();
 
-        return $this->render('out_of_office/ajoutEspace.html.twig',['vueFormulaire'=> $vueFormulaireEspace]);
+        return $this->render('out_of_office/ajoutEspace.html.twig',['vueFormulaire'=> $vueFormulaireEspace,'action'=> "ajouter"]);
+    }
+
+      //--------------------------Modifier un espace--------------------------------------
+    /**
+     * @Route("/options/Modifier un espace", name="modifEspace")
+     */
+    public function modifEspace(Request $request, EntityManagerInterface $manager): Response
+    {
+        $espace = new EspaceDeCoworking();
+
+        $formulaireEspace= $this->createFormBuilder($espace)
+
+        ->add('url', UrlType::class)
+        ->add('titre', TextareaType::class)
+        ->add('prix', NumberType::class)
+        ->add('adresse', TextareaType::class)
+        ->add('descriptif', TextareaType::class)
+        ->add('imprimante', CheckboxType::class)
+        ->add('parking', CheckboxType::class)
+        ->add('cafe', CheckboxType::class)
+        ->add('heureOuverture', TextareaType::class)
+        ->add('heureFermeture', TextareaType::class)
+        ->add('nombrePlace', NumberType::class)
+        ->add('nombrePlaceLibre', NumberType::class)
+
+
+        ->getForm();
+
+        $formulaireEspace->handleRequest($request); 
+
+        if( $formulaireEspace->isSubmitted())
+        {
+            $manager->persist($espace);
+            $manager->flush();
+            return $this -> redirectToRoute('Accueil');
+        }
+
+
+        $vueFormulaireEspace=$formulaireEspace->createView();
+
+        return $this->render('out_of_office/ajoutEspace.html.twig',['vueFormulaire'=> $vueFormulaireEspace,'action'=> "modifier"]);
     }
 }
