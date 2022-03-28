@@ -135,6 +135,8 @@ class OutOfOfficeController extends AbstractController
         ->add('heureFermeture', TextareaType::class)
         ->add('nombrePlace', NumberType::class)
         ->add('nombrePlaceLibre', NumberType::class)
+        ->add('lat', NumberType::class)
+        ->add('longitude', NumberType::class)
 
 
         ->getForm();
@@ -160,7 +162,6 @@ class OutOfOfficeController extends AbstractController
      */
     public function modifEspace(Request $request, EntityManagerInterface $manager): Response
     {
-        $espace = new EspaceDeCoworking();
 
         $formulaireEspace= $this->createFormBuilder($espace)
 
@@ -176,10 +177,11 @@ class OutOfOfficeController extends AbstractController
         ->add('heureFermeture', TextareaType::class)
         ->add('nombrePlace', NumberType::class)
         ->add('nombrePlaceLibre', NumberType::class)
-
+        ->add('lat', NumberType::class)
+        ->add('longitude', NumberType::class)
 
         ->getForm();
-
+        
         $formulaireEspace->handleRequest($request); 
 
         if( $formulaireEspace->isSubmitted())

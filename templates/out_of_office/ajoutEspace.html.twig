@@ -2,7 +2,15 @@
 
 {% block body %}
 
-<center><h1>Formulaire d'ajout d'un espace</h1></center>
+{% if action =="ajouter"%}
+<div>
+        <center><h1 class="display-4">Ajout d'un espace de coworking</h1></center>
+</div>
+{% else %}
+<div>
+        <center><h1 class="display-4">Modification d'un espace de coworking</h1></center>
+</div>
+{% endif %}
 
 <br>
 
@@ -32,7 +40,12 @@
 
 {{ form_row(vueFormulaire.nombrePlaceLibre, {'attr':{'placeholder':"Nombre de place libre...."}})}}
 
+{{ form_row(vueFormulaire.lat, {'attr':{'placeholder':"Latitude...."}})}}
+
+{{ form_row(vueFormulaire.longitude, {'attr':{'placeholder':"Longitude...."}})}}
+
 <button type="submit" class="btn btn-dark">Enregistrer</button>
+
 {{ form_end(vueFormulaire) }}
 
 {% endblock %} 
