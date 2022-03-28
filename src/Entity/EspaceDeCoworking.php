@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EspaceDeCoworkingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EspaceDeCoworkingRepository::class)
@@ -19,73 +20,91 @@ class EspaceDeCoworking
 
     /**
      * @ORM\Column(type="string", length=255)
+     * *@Assert\NotBlank;
+     * *@Assert\Url
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * *@Assert\NotBlank;
      */
     private $titre;
 
     /**
      * @ORM\Column(type="float")
+     * *@Assert\NotBlank;
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * *@Assert\NotBlank;
+     * *@Assert\Regex(pattern="# (rue|boulevard|avenue|impasse|allée|place|voie|allee) #i",message="Le type de voie/rue semble incorrect");
+     * *@Assert\Regex(pattern="#^[1-999]( )?(bis)? #", message="Le numéro de route semble incorrect");
+     * *@Assert\Regex(pattern="# [0-9]{5} #",message="Il semble y avoir un probleme avec le code postal");
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * *@Assert\NotBlank;
      */
     private $descriptif;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $imprimante;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $parking;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $cafe;
 
     /**
      * @ORM\Column(type="string", length=6)
+     * *@Assert\Regex("#[0-24]h[0-59]#");
+     * *@Assert\NotBlank;
      */
     private $heureOuverture;
 
     /**
      * @ORM\Column(type="string", length=6)
+     * *@Assert\Regex("#[0-24]h[0-59]#");
+     * *@Assert\NotBlank;
      */
     private $heureFermeture;
 
     /**
      * @ORM\Column(type="integer")
+     * *@Assert\NotBlank;
      */
     private $nombrePlace;
 
     /**
      * @ORM\Column(type="integer")
+     * *@Assert\NotBlank;
      */
     private $nombrePlaceLibre;
 
     /**
      * @ORM\Column(type="float")
+     * *@Assert\NotBlank;
      */
     private $lat;
 
     /**
      * @ORM\Column(type="float")
+     * *@Assert\NotBlank;
      */
     private $longitude;
+
 
     public function getId(): ?int
     {
@@ -256,6 +275,18 @@ class EspaceDeCoworking
     public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getTest(): ?bool
+    {
+        return $this->Test;
+    }
+
+    public function setTest(?bool $Test): self
+    {
+        $this->Test = $Test;
 
         return $this;
     }

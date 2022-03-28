@@ -14,10 +14,17 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use App\Entity\EspaceDeCoworking;
+use App\Entity\User;
+
 use App\Repository\EspaceDeCoworkingRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+
+use App\Form\EspaceDeCoworkingType;
+use App\From\UserType;
+
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class OutOfOfficeController extends AbstractController
@@ -115,31 +122,13 @@ class OutOfOfficeController extends AbstractController
 
     //--------------------------Ajout d'un espace--------------------------------------
     /**
-     * @Route("/options/ajoutEspace", name="ajoutEspace")
+     * @Route("/gerant/options/ajoutEspace", name="ajoutEspace")
      */
     public function ajoutEspace(Request $request, EntityManagerInterface $manager): Response
     {
         $espace = new EspaceDeCoworking();
 
-        $formulaireEspace= $this->createFormBuilder($espace)
-
-        ->add('url', UrlType::class)
-        ->add('titre', TextareaType::class)
-        ->add('prix', NumberType::class)
-        ->add('adresse', TextareaType::class)
-        ->add('descriptif', TextareaType::class)
-        ->add('imprimante', CheckboxType::class)
-        ->add('parking', CheckboxType::class)
-        ->add('cafe', CheckboxType::class)
-        ->add('heureOuverture', TextareaType::class)
-        ->add('heureFermeture', TextareaType::class)
-        ->add('nombrePlace', NumberType::class)
-        ->add('nombrePlaceLibre', NumberType::class)
-        ->add('lat', NumberType::class)
-        ->add('longitude', NumberType::class)
-
-
-        ->getForm();
+        $formulaireEspace= $this->createForm(EspaceDeCoworkingType::class,$espace);
 
         $formulaireEspace->handleRequest($request); 
 
@@ -147,7 +136,7 @@ class OutOfOfficeController extends AbstractController
         {
             $manager->persist($espace);
             $manager->flush();
-            return $this -> redirectToRoute('ajoutEspace');
+            return $this -> redirectToRoute('Accueil');
         }
 
 
@@ -158,30 +147,13 @@ class OutOfOfficeController extends AbstractController
 
       //--------------------------Modifier un espace--------------------------------------
     /**
-     * @Route("/options/Modifier un espace", name="modifEspace")
+     * @Route("/gerant/options/Modifier un espace", name="modifEspace")
      */
     public function modifEspace(Request $request, EntityManagerInterface $manager): Response
     {
 
-        $formulaireEspace= $this->createFormBuilder($espace)
+        $formulaireEntreprise= $this->createForm(EntrepriseType::class,$entreprise);
 
-        ->add('url', UrlType::class)
-        ->add('titre', TextareaType::class)
-        ->add('prix', NumberType::class)
-        ->add('adresse', TextareaType::class)
-        ->add('descriptif', TextareaType::class)
-        ->add('imprimante', CheckboxType::class)
-        ->add('parking', CheckboxType::class)
-        ->add('cafe', CheckboxType::class)
-        ->add('heureOuverture', TextareaType::class)
-        ->add('heureFermeture', TextareaType::class)
-        ->add('nombrePlace', NumberType::class)
-        ->add('nombrePlaceLibre', NumberType::class)
-        ->add('lat', NumberType::class)
-        ->add('longitude', NumberType::class)
-
-        ->getForm();
-        
         $formulaireEspace->handleRequest($request); 
 
         if( $formulaireEspace->isSubmitted())
@@ -195,5 +167,44 @@ class OutOfOfficeController extends AbstractController
         $vueFormulaireEspace=$formulaireEspace->createView();
 
         return $this->render('out_of_office/ajoutEspace.html.twig',['vueFormulaire'=> $vueFormulaireEspace,'action'=> "modifier"]);
+    }
+
+    /**
+     * @Route("/inscription", name="inscription")
+     */
+    public function inscription(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
+    {
+
+        $user= New User();
+
+        $formulaireUser= $this->createForm(UserType::class,$user);
+
+
+        $formulaireUser->handleRequest($request);
+
+        if( $formulaireUser->isSubmitted() && $formulaireUser->isValid())
+        {
+            if($user->getEstGerant() == true)
+            {
+                $user->setRoles(['ROLE_CLIENT','ROLE_GERANT']);
+                
+            }
+            else
+            {
+                $user->setRoles(['ROLE_CLIENT']);
+            }
+            
+            $encodagePassword = $encoder->encodePassword($user,$user->getPassword());
+            $user->setPassword($encodagePassword);
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this -> redirectToRoute('app_login');
+        }
+        $vueformulaireUser=$formulaireUser->createView();
+
+
+        return $this->render('out_of_office/inscription.html.twig',['vueFormulaire'=> $vueformulaireUser]);
     }
 }
