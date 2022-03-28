@@ -6,6 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use App\Entity\EspaceDeCoworking;
+use App\Repository\EspaceDeCoworkingRepository;
+
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+
+
 class OutOfOfficeController extends AbstractController
 {
     //--------------------------Accueil--------------------------------------
@@ -44,7 +58,7 @@ class OutOfOfficeController extends AbstractController
     }
     //--------------------------Modifier reservation--------------------------------------
     /**
-     * @Route("/options/modifierReservation", name="modifierReservation")
+     * @Route("/options/modifierReservation/{id}", name="modifierReservation")
      */
     public function modifierReservation(): Response
     {
@@ -55,7 +69,7 @@ class OutOfOfficeController extends AbstractController
     }
     //--------------------------Annuler une réservation--------------------------------------
     /**
-     * @Route("/options/annulerReservation", name="annulerReservation")
+     * @Route("/options/annulerReservation/{id}", name="annulerReservation")
      */
     public function annulerReservation(): Response
     {
@@ -66,7 +80,7 @@ class OutOfOfficeController extends AbstractController
     }
     //--------------------------Consulter factures reçues--------------------------------------
     /**
-     * @Route("/options/consulterFactures", name="consulterFactures")
+     * @Route("/options/consulterFactures/{id}", name="consulterFactures")
      */
     public function consulterFactures(): Response
     {
@@ -96,5 +110,46 @@ class OutOfOfficeController extends AbstractController
             'controller_name' => 'OutOfOfficeController',
             
         ]);
+    }
+
+    //--------------------------Ajout d'un espace--------------------------------------
+    /**
+     * @Route("/options/ajoutEspace", name="ajoutEspace")
+     */
+    public function ajoutEspace(Request $request, EntityManagerInterface $manager): Response
+    {
+        $espace = new EspaceDeCoworking();
+
+        $formulaireEspace= $this->createFormBuilder($espace)
+
+        ->add('url', UrlType::class)
+        ->add('titre', TextareaType::class)
+        ->add('prix', NumberType::class)
+        ->add('adresse', TextareaType::class)
+        ->add('descriptif', TextareaType::class)
+        ->add('imprimante', CheckboxType::class)
+        ->add('parking', CheckboxType::class)
+        ->add('cafe', CheckboxType::class)
+        ->add('heureOuverture', TextareaType::class)
+        ->add('heureFermeture', TextareaType::class)
+        ->add('nombrePlace', NumberType::class)
+        ->add('nombrePlaceLibre', NumberType::class)
+
+
+        ->getForm();
+
+        $formulaireEspace->handleRequest($request);
+
+        if( $formulaireEspace->isSubmitted()  && $formulaireEspace->isValid())
+        {
+            $manager->persist($espace);
+            $manager->flush();
+            return $this -> redirectToRoute('ajoutEspace');
+        }
+
+
+        $vueFormulaireEspace=$formulaireEspace->createView();
+
+        return $this->render('out_of_office/ajoutEspace.html.twig',['vueFormulaire'=> $vueFormulaireEspace]);
     }
 }

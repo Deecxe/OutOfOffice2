@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<center><h1>Formulaire d'ajout d'un espace</h1></center>
+
+<br>
+
+{{ form_start(vueFormulaire) }}
+
+{{ form_row(vueFormulaire.url, {'attr':{'placeholder':"Image de l'espace...."}})}}
+
+{{ form_row(vueFormulaire.titre, {'attr':{'placeholder':"Titre de l'espace...."}})}}
+
+{{ form_row(vueFormulaire.prix, {'attr':{'placeholder':"Prix de l'espace...."}})}}
+
+{{ form_row(vueFormulaire.adresse, {'attr':{'placeholder':"Adresse de l'espace..."}})}}
+
+{{ form_row(vueFormulaire.descriptif, {'attr':{'placeholder':"Descriptif de l'espace..."}})}}
+
+{{ form_row(vueFormulaire.imprimante, {'attr':{'placeholder':"Imprimante dispo"}})}}
+
+{{ form_row(vueFormulaire.parking, {'attr':{'placeholder':"Parking dispo"}})}}
+
+{{ form_row(vueFormulaire.cafe, {'attr':{'placeholder':"Machie à café dispo"}})}}
+
+{{ form_row(vueFormulaire.heureOuverture, {'attr':{'placeholder':"Heure d'ouverture...."}})}}
+
+{{ form_row(vueFormulaire.heureFermeture, {'attr':{'placeholder':"Heure de fermeture...."}})}}
+
+{{ form_row(vueFormulaire.nombrePlace, {'attr':{'placeholder':"Nombre de place...."}})}}
+
+{{ form_row(vueFormulaire.nombrePlaceLibre, {'attr':{'placeholder':"Nombre de place libre...."}})}}
+
+<button type="submit" class="btn btn-dark">Enregistrer</button>
+{{ form_end(vueFormulaire) }}
+
+{% endblock %} 
