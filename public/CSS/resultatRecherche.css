@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+  }
+  
+  .list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    padding: 0 30px;
+  }
+  
