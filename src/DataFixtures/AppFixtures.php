@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingAnglet->setHeureFermeture('18h00');
         $EspaceDeCoworkingAnglet->setNombrePlace(10);
         $EspaceDeCoworkingAnglet->setNombrePlaceLibre(10);
-        $EspaceDeCoworkingBayonne->setLat(43.4813927);
+        $EspaceDeCoworkingBayonne->setLat(43.4934379);
         $EspaceDeCoworkingBayonne->setLongitude(-1.5149935);
         $manager->persist($EspaceDeCoworkingAnglet);
         $manager->flush();

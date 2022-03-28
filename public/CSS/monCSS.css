@@ -155,5 +155,8 @@ ul
     color:red;
   }
   .map {
-    background-color: red;
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
   }
