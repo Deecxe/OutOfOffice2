@@ -1,6 +1,30 @@
-<html>
-<head>
-    <title>Projets Webservices</title>
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+
+    <link href="/CSS/monCSS.css" rel="stylesheet">
+
+    {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="list">
+            {% for coworking in espaceDeCoworking %}
+                <div class="item js-marker" data.lat="{{coworking.lat}}" data.lng="{{coworking.longitude}}" data-price={{coworking.prix}}>
+                <img src="https://via.placeholder.com/400x260" alt="">
+                <h4> {{coworking.titre}} </h4>
+                <p>
+                    {{coworking.prix}}
+                    {{coworking.cafe}}
+                    {{coworking.adresse}}
+                    {{coworking.descriptif}}
+                    {{coworking.heureOuverture}}
+                    {{coworking.heureFermeture}}
+
+
+                </p>
+            {% endfor %}
+        </div>
+        <div class="map" id="map">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
@@ -8,7 +32,7 @@
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
     <style>
-        #map { height: 94%; }
+        #map { height: 70%; }
     </style>
 <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
 <body onload="listeVille()">
@@ -20,13 +44,11 @@
             <button onClick="maPosition()">Ma position</button>
         </p>
     </forms>
-    
-    
+
+
     <script>
        //Initialisation de la carte
        var map = L.map('map').setView([45.4248753, 2.7873028], 6);
-
-
        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -35,15 +57,11 @@
             zoomOffset: -1,
             accessToken: 'pk.eyJ1Ijoid2VieWMiLCJhIjoiY2pzYnQ0MDByMDMzazRhbnl6NnNrZnVsYiJ9.MQe0cRrJaGs-t4vjt4MXoQ'
         }).addTo(map);
-
-
-
        //Getter
        function getLatitude()
        {
            return map.getCenter().lat
        }
-
        function getLongitude()
        {
            return map.getCenter().lng
@@ -53,22 +71,18 @@
        {
         inputRecherche = document.getElementById("recherche");
         var req = new XMLHttpRequest();
-
         req.open('GET', "https://api-adresse.data.gouv.fr/search/?q="+ inputRecherche.value +"&limit=1", false);
         req.send(null);
         const reponse = req.responseText
         const objet = JSON.parse(reponse)
-
         map.setView([objet.features[0].geometry.coordinates[1],objet.features[0].geometry.coordinates[0]], 13);
         var marker = L.marker([getLatitude(),getLongitude()]).addTo(map);
         miseAJOurCoordonnees()
        }
-
        function maPosition() 
        {
             navigator.geolocation.getCurrentPosition(showPosition);
        }
-
         function showPosition(position) 
         {
             map.setView([position.coords.latitude,position.coords.longitude], 13);
@@ -82,5 +96,11 @@
         .bindPopup("Espace de coworking 2")
         
     </script>
-</html>
-    
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

@@ -52,7 +52,6 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingBayonne->setNombrePlaceLibre(20);
         $EspaceDeCoworkingBayonne->setLat(43.4933379);
         $EspaceDeCoworkingBayonne->setLongitude(-1.475099);
-
         $manager->persist($EspaceDeCoworkingBayonne);
 
         $EspaceDeCoworkingAnglet = new EspaceDeCoworking();
