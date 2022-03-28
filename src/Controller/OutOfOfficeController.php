@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\EspaceDeCoworking;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,10 +40,11 @@ class OutOfOfficeController extends AbstractController
      */
     public function resultatRecherche(): Response
     {
-        return $this->render('out_of_office/resultatRecherche.html.twig', [
-            'controller_name' => 'OutOfOfficeController',
-            
-        ]);
+        $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
+        
+        $espaceDeCoworking = $repositoryEspaceDeCoworking->findAll();
+    
+        return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworking]);
     }
 
     //--------------------------Options--------------------------------------
