@@ -18,7 +18,7 @@ class Reservation
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $cout;
 
@@ -37,17 +37,22 @@ class Reservation
      */
     private $heureFin;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $nombrePlaceReservees;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCout(): ?int
+    public function getCout(): ?float
     {
         return $this->cout;
     }
 
-    public function setCout(int $cout): self
+    public function setCout(float $cout): self
     {
         $this->cout = $cout;
 
@@ -86,6 +91,18 @@ class Reservation
     public function setHeureFin(string $heureFin): self
     {
         $this->heureFin = $heureFin;
+
+        return $this;
+    }
+
+    public function getNombrePlaceReservees(): ?int
+    {
+        return $this->nombrePlaceReservees;
+    }
+
+    public function setNombrePlaceReservees(int $nombrePlaceReservees): self
+    {
+        $this->nombrePlaceReservees = $nombrePlaceReservees;
 
         return $this;
     }
