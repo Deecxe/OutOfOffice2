@@ -30,9 +30,18 @@
 <button type="submit">Ajouter un espace</button>
 </form>
 <br>
-<form action={{path('Accueil')}} method="get">
-<button type="submit">Déconnexion</button>
-</form>
+
+{% if is_granted ('ROLE_USER') %}
+    <form action={{path('app_logout')}} method="get">
+    <button type="submit">Deconnexion</button>
+    </form>
+    <br>
+{% else %}
+    <form action={{path('app_login')}} method="get">
+    <button type="submit">Connexion</button>
+    </form>
+    <br>
+{% endif %}
 
 </center>
 

@@ -15,6 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use App\Entity\EspaceDeCoworking;
 use App\Entity\User;
+use App\Entity\Reservation;
+use App\Entity\Facture;
 
 use App\Repository\EspaceDeCoworkingRepository;
 
@@ -169,8 +171,9 @@ class OutOfOfficeController extends AbstractController
         return $this->render('out_of_office/ajoutEspace.html.twig',['vueFormulaire'=> $vueFormulaireEspace,'action'=> "modifier"]);
     }
 
+    //--------------------------Inscription--------------------------------------
     /**
-     * @Route("/inscription", name="inscription")
+     * @Route("/options/inscription", name="inscription")
      */
     public function inscription(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
