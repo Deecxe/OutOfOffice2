@@ -19,12 +19,13 @@ use App\Entity\Reservation;
 use App\Entity\Facture;
 
 use App\Repository\EspaceDeCoworkingRepository;
+use App\Repository\UserRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\EspaceDeCoworkingType;
-use App\From\UserType;
+use App\Form\UserType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -59,10 +60,14 @@ class OutOfOfficeController extends AbstractController
     /**
      * @Route("/options", name="options")
      */
-    public function options(): Response
+    public function options(UserRepository $repositoryUser): Response
     {
+        $users = $repositoryUser->findAll();
+
         return $this->render('out_of_office/options.html.twig', [
             'controller_name' => 'OutOfOfficeController',
+            'users' => $users,
+
             
         ]);
     }
@@ -101,14 +106,24 @@ class OutOfOfficeController extends AbstractController
     }
     //--------------------------Modifier mon profil--------------------------------------
     /**
-     * @Route("/options/modifierProfil", name="modifierProfil")
+     * @Route("/options/modifierProfil/{id}", name="modifierProfil")
      */
-    public function modifierProfil(): Response
+    public function modifierProfil(Request $request, EntityManagerInterface $manager, User $user): Response
     {
-        return $this->render('out_of_office/modifierProfil.html.twig', [
-            'controller_name' => 'OutOfOfficeController',
-            
-        ]);
+        $formulaireUser= $this->createForm(UserType::class,$user);
+
+        $formulaireUser->handleRequest($request);
+
+        if( $formulaireUser->isSubmitted())
+        {
+            $manager->persist($entreprise);
+            $manager->flush();
+
+            return $this -> redirectToRoute('metier_accueil');
+        }
+        $vueFormulaireUser=$formulaireUser->createView();
+
+        return $this->render('out_of_office/modifierProfil.html.twig', ['vueFormulaire'=> $vueFormulaireUser,]);
     }
     //--------------------------Deconnexion--------------------------------------
     /**
@@ -128,6 +143,7 @@ class OutOfOfficeController extends AbstractController
      */
     public function ajoutEspace(Request $request, EntityManagerInterface $manager): Response
     {
+
         $espace = new EspaceDeCoworking();
 
         $formulaireEspace= $this->createForm(EspaceDeCoworkingType::class,$espace);
@@ -136,6 +152,7 @@ class OutOfOfficeController extends AbstractController
 
         if( $formulaireEspace->isSubmitted()  && $formulaireEspace->isValid())
         {
+            $espace->setNombrePlaceLibre($espace->getNombrePlace());
             $manager->persist($espace);
             $manager->flush();
             return $this -> redirectToRoute('Accueil');
@@ -154,7 +171,7 @@ class OutOfOfficeController extends AbstractController
     public function modifEspace(Request $request, EntityManagerInterface $manager): Response
     {
 
-        $formulaireEntreprise= $this->createForm(EntrepriseType::class,$entreprise);
+        $formulaireEspace= $this->createForm(EspaceDeCoworkingType::class,$espace);
 
         $formulaireEspace->handleRequest($request); 
 

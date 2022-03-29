@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Inscription </h1>
+
+    {{ form_start(vueFormulaire, {'attr':{"novalidate":"novalidate"}}) }}
+
+    {{ form_row(vueFormulaire.prenom, {'attr':{'placeholder':"Name...."}})}}
+
+    {{ form_row(vueFormulaire.nom, {'attr':{'placeholder':"Firstname...."}})}}
+
+    {{ form_row(vueFormulaire.username, {'attr':{'placeholder':"Username...."}})}}
+
+    {{ form_row(vueFormulaire.password, {'attr':{'placeholder':"Password...."}})}}
+
+    {{ form_row(vueFormulaire.email, {'attr':{'placeholder':"Email...."}})}}
+
+    {{ form_row(vueFormulaire.metier, {'attr':{'placeholder':"Metier...."}})}}
+
+    {{ form_row(vueFormulaire.secteurActivite, {'attr':{'placeholder':"Secteur d'activite...."}})}}
+
+    {{ form_row(vueFormulaire.estGerant, {'attr':{'placeholder':"Etes vous gerant"}})}}
+
+    <button type="submit" class="btn btn-dark">S'inscrire</button>
+
+    {{ form_end(vueFormulaire) }}
+{% endblock %} 

@@ -71,9 +71,15 @@ class User implements UserInterface
      */
     private $reservations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=EspaceDeCoworking::class, mappedBy="idUser")
+     */
+    private $espaceDeCoworkings;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->espaceDeCoworkings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,6 +254,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($reservations->getIdUser() === $this) {
                 $reservations->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EspaceDeCoworking>
+     */
+    public function getEspaceDeCoworkings(): Collection
+    {
+        return $this->espaceDeCoworkings;
+    }
+
+    public function addEspaceDeCoworking(EspaceDeCoworking $espaceDeCoworking): self
+    {
+        if (!$this->espaceDeCoworkings->contains($espaceDeCoworking)) {
+            $this->espaceDeCoworkings[] = $espaceDeCoworking;
+            $espaceDeCoworking->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEspaceDeCoworking(EspaceDeCoworking $espaceDeCoworking): self
+    {
+        if ($this->espaceDeCoworkings->removeElement($espaceDeCoworking)) {
+            // set the owning side to null (unless already changed)
+            if ($espaceDeCoworking->getIdUser() === $this) {
+                $espaceDeCoworking->setIdUser(null);
             }
         }
 

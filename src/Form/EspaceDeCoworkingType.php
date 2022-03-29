@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\EspaceDeCoworking;
+use App\Entity\User;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class EspaceDeCoworkingType extends AbstractType
 {
@@ -23,7 +27,6 @@ class EspaceDeCoworkingType extends AbstractType
             ->add('heureOuverture')
             ->add('heureFermeture')
             ->add('nombrePlace')
-            ->add('nombrePlaceLibre')
             ->add('lat')
             ->add('longitude')
         ;

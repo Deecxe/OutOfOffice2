@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\EspaceDeCoworking;
 use App\Entity\User;
+use App\Entity\Reservation;
+use App\Entity\Facture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;

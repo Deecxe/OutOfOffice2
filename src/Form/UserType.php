@@ -15,7 +15,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('roles')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Mot de passe invalide',

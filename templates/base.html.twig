@@ -18,13 +18,10 @@
     <link href="/CSS/monCSS.css" rel="stylesheet">
     
     <link href="/css/fontello.css" rel="stylesheet">
-<<<<<<< HEAD
 
     <link href="/CSS/resultatRecherche.css" rel="stylesheet">
 
-=======
     
->>>>>>> 2eadd3c24a5d6e6d90a655696d74893b5ac74190
     {% endblock %}
 
  
@@ -43,9 +40,18 @@
         
     <div class="topnav">
         <ul>
-            <li style ="float:left"><a href="{{path('options')}}"><i class="icon-align-justify"></i></a></li>
+            {% if is_granted ('ROLE_USER') %}
+                <li style ="float:left"><a href="{{path('options')}}"><i class="icon-align-justify"></i></a></li>
+            {% else %}
+                <form action={{path('app_login')}} method="get">
+                <button type="submit">Connexion</button>
+                </form>
+            {% endif %}
             <li style ="float:middle"><a href="{{path('Accueil')}}">Out Of Office</a></li>
-            <li style="float:right"><a href="contact.asp"><i class="icon-comment"></i></a></li>
+            {% if is_granted ('ROLE_USER') %}
+                <li style="float:right"><a href="contact.asp"><i class="icon-comment"></i></a></li>
+            {% else %}
+            {% endif %}
             <form action="{{path('resultatRecherche')}}">
                 <li style ="float:right"><button type="submit"><i class="icon-search"></i></button></li>
             </form>

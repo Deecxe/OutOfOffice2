@@ -22,35 +22,35 @@ class EspaceDeCoworking
 
     /**
      * @ORM\Column(type="string", length=255)
-     * *@Assert\NotBlank;
-     * *@Assert\Url
+     * @Assert\NotBlank;
+     * @Assert\Url
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * *@Assert\NotBlank;
+     * @Assert\NotBlank;
      */
     private $titre;
 
     /**
      * @ORM\Column(type="float")
-     * *@Assert\NotBlank;
+     * @Assert\NotBlank;
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * *@Assert\NotBlank;
-     * *@Assert\Regex(pattern="# (rue|boulevard|avenue|impasse|allée|place|voie|allee) #i",message="Le type de voie/rue semble incorrect");
-     * *@Assert\Regex(pattern="#^[1-999]( )?(bis)? #", message="Le numéro de route semble incorrect");
-     * *@Assert\Regex(pattern="# [0-9]{5} #",message="Il semble y avoir un probleme avec le code postal");
+     * @Assert\NotBlank;
+     * @Assert\Regex(pattern="#^[1-999]( )?(bis)?#", message="Le numéro de route semble incorrect");
+     * @Assert\Regex(pattern="#rue|boulevard|avenue|impasse|allée|place|voie|allee#i",message="Le type de voie/rue semble incorrect");
+     * @Assert\Regex(pattern="#[0-9]{5}#",message="Il semble y avoir un probleme avec le code postal");
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * *@Assert\NotBlank;
+     * @Assert\NotBlank;
      */
     private $descriptif;
 
@@ -71,39 +71,38 @@ class EspaceDeCoworking
 
     /**
      * @ORM\Column(type="string", length=6)
-     * *@Assert\Regex("#[0-24]h[0-59]#");
-     * *@Assert\NotBlank;
+     * @Assert\Regex("#[0-24]h[0-59]#");
+     * @Assert\NotBlank;
      */
     private $heureOuverture;
 
     /**
      * @ORM\Column(type="string", length=6)
-     * *@Assert\Regex("#[0-24]h[0-59]#");
-     * *@Assert\NotBlank;
+     * @Assert\Regex("#[0-24]h[0-59]#");
+     * @Assert\NotBlank;
      */
     private $heureFermeture;
 
     /**
      * @ORM\Column(type="integer")
-     * *@Assert\NotBlank;
+     * @Assert\NotBlank;
      */
     private $nombrePlace;
 
     /**
      * @ORM\Column(type="integer")
-     * *@Assert\NotBlank;
      */
     private $nombrePlaceLibre;
 
     /**
      * @ORM\Column(type="float")
-     * *@Assert\NotBlank;
+     * @Assert\NotBlank;
      */
     private $lat;
 
     /**
      * @ORM\Column(type="float")
-     * *@Assert\NotBlank;
+     * @Assert\NotBlank;
      */
     private $longitude;
 
@@ -111,6 +110,11 @@ class EspaceDeCoworking
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="idEspace")
      */
     private $reservations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="espaceDeCoworkings")
+     */
+    private $idUser;
 
     public function __construct()
     {
@@ -329,6 +333,18 @@ class EspaceDeCoworking
                 $reservation->setIdEspace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }
