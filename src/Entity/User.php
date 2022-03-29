@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -63,6 +65,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $estGerant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="idUser")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -208,6 +220,36 @@ class User implements UserInterface
     public function setEstGerant(?bool $estGerant): self
     {
         $this->estGerant = $estGerant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getIdReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addIdReservations(Reservation $reservations): self
+    {
+        if (!$this->reservations->contains($reservations)) {
+            $this->reservations[] = $reservations;
+            $reservations->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdReservations(Reservation $reservations): self
+    {
+        if ($this->reservations->removeElement($reservations)) {
+            // set the owning side to null (unless already changed)
+            if ($reservations->getIdUser() === $this) {
+                $reservations->setIdUser(null);
+            }
+        }
 
         return $this;
     }

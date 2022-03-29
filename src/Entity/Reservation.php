@@ -42,6 +42,16 @@ class Reservation
      */
     private $nombrePlaceReservees;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="idEspace")
+     */
+    private $idUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=EspaceDeCoworking::class, inversedBy="reservations")
+     */
+    private $idEspace;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +113,30 @@ class Reservation
     public function setNombrePlaceReservees(int $nombrePlaceReservees): self
     {
         $this->nombrePlaceReservees = $nombrePlaceReservees;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getIdEspace(): ?EspaceDeCoworking
+    {
+        return $this->idEspace;
+    }
+
+    public function setIdEspace(?EspaceDeCoworking $idEspace): self
+    {
+        $this->idEspace = $idEspace;
 
         return $this;
     }
