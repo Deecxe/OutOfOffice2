@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
+    {% block stylesheets %}
 
+    
+    <link href="/CSS/monCSS.css" rel="stylesheet">
+    
+    <link href="/css/fontello.css" rel="stylesheet">
+    
+    {% endblock %}
 {% block body %}
     <div class="container">
             <div class="list">
@@ -178,6 +185,7 @@
                 constructor ()
                 {
                     this.map = null
+                    this.bounds = []
                 }
                 async load (element)
                 {
@@ -185,7 +193,7 @@
                         {
                         $script('https://unpkg.com/leaflet@1.3.1/dist/leaflet.js', () =>
                         {
-                            this.map = L.map(element).setView([43.4933379, -1.475099], 13);
+                            this.map = L.map(element);
                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
                                 {
                                     attribution: 'Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -205,29 +213,63 @@
 
             addMarker (lat, lng, text)
             {
-                L.popup({
-                    autoClose: false,
-                    closeOnEscapeKey: false,
-                    closeOnClick: false,
-                    closeButton: false,
-                    className: 'marker',
-                    maxWidth: 400
-
-                })
-                .setLatLng([lat, lng])
-                .setContent(text)
-                .openOn(this.map)
-            }
+                let point = [lat, lng]
+                this.bounds.push(point)
+                return new LeafletMarker(point, text, this.map)
             }
 
+            center ()
+            {
+                this.map.fitBounds(this.bounds)
+            }
+        }
+            class LeafletMarker
+            {
+                constructor(point, text, map)
+                {
+                    
+                    this.popup = L.popup({
+                        autoClose: false,
+                        closeOnEscapeKey: false,
+                        closeOnClick: false,
+                        closeButton: false,
+                        className: 'marker',
+                        maxWidth: 400
+
+                    })
+                    .setLatLng(point)
+                    .setContent(text)
+                    .openOn(map)
+                }
+                setActive ()
+                {
+                    this.popup.getElement().classList.add('is-active')
+                }
+
+                unsetActive ()
+                {
+                    this.popup.getElement().classList.remove('is-active')
+                }
+            }
                 const initMap = async function ()
                 {
                     let map = new leafletMap();
+                    let hoverMarker = null
                     await map.load($map);
                     Array.from(document.querySelectorAll('.js-marker')).forEach ((item) =>
                     {
-                        map.addMarker(item.dataset.lat, item.dataset.lng, item.dataset.price + '€')
+                        let marker = map.addMarker(item.dataset.lat, item.dataset.lng, item.dataset.price + '€')
+                        item.addEventListener('mouseover', function()
+                        {
+                            if (hoverMarker !== null)
+                            {
+                                hoverMarker.unsetActive()
+                            }
+                            marker.setActive()
+                            hoverMarker = marker
+                        })
                     })
+                    map.center()
                 }
 
             if ($map !== null)
