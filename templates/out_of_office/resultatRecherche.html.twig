@@ -227,7 +227,7 @@
             {
                 constructor(point, text, map)
                 {
-                    
+                    this.text = text                
                     this.popup = L.popup({
                         autoClose: false,
                         closeOnEscapeKey: false,
@@ -250,11 +250,31 @@
                 {
                     this.popup.getElement().classList.remove('is-active')
                 }
+
+                addEventListener (event,cb)
+                {
+                    this.popup.addEventListener('add', ()=>{                                     
+                     this.popup.getElement().addEventListener(event, cb)
+                      })
+                }
+
+                setContent (text) {
+                    this.popup.setContent(text)
+                    this.popup.getElement().classList.add('is-expanded')
+                    this.popup.update()
+                }
+
+                resetContent () {
+                    this.popup.setContent(this.text)
+                    this.popup.getElement().classList.add('is-expanded')
+                    this.popup.update()
+                }
             }
                 const initMap = async function ()
                 {
                     let map = new leafletMap();
                     let hoverMarker = null
+                    let activeMarker = null
                     await map.load($map);
                     Array.from(document.querySelectorAll('.js-marker')).forEach ((item) =>
                     {
@@ -268,6 +288,20 @@
                             marker.setActive()
                             hoverMarker = marker
                         })
+                        item.addEventListener('mouseleave', function(){
+                            if (hoverMarker !=null)
+                            {
+                                hoverMarker.unsetActive()
+                            }
+                        })
+                        marker.addEventListener('click',function () {
+                            if ( activeMarker !==null)
+                            {
+                                activeMarker.resetContent()
+                            } 
+                            marker.setContent(item.innerHTML)
+                            activeMarker = marker
+                        }) 
                     })
                     map.center()
                 }
