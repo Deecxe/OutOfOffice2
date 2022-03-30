@@ -26,8 +26,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\EspaceDeCoworkingType;
 use App\Form\UserType;
+use App\Form\UserModifType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 class OutOfOfficeController extends AbstractController
@@ -60,13 +63,12 @@ class OutOfOfficeController extends AbstractController
     /**
      * @Route("/options", name="options")
      */
-    public function options(UserRepository $repositoryUser): Response
+    public function options(): Response
     {
-        $users = $repositoryUser->findAll();
 
         return $this->render('out_of_office/options.html.twig', [
             'controller_name' => 'OutOfOfficeController',
-            'users' => $users,
+ 
 
             
         ]);
@@ -108,33 +110,32 @@ class OutOfOfficeController extends AbstractController
     /**
      * @Route("/options/modifierProfil/{id}", name="modifierProfil")
      */
-    public function modifierProfil(Request $request, EntityManagerInterface $manager, User $user): Response
+    public function modifierProfil(Request $request, EntityManagerInterface $manager,User $user): Response
     {
-        $formulaireUser= $this->createForm(UserType::class,$user);
+        if( !$this->getUser())
+        {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $formulaireUser= $this->createForm(UserModifType::class,$user);
 
         $formulaireUser->handleRequest($request);
 
         if( $formulaireUser->isSubmitted())
         {
-            $manager->persist($entreprise);
-            $manager->flush();
+                $user = $formulaireUser->getData();
 
-            return $this -> redirectToRoute('metier_accueil');
+                $manager->persist($user);
+                $manager->flush();
+            
+                $this->addFlash( 'succes', 'Profil modifié');
+
+                return $this -> redirectToRoute('Accueil');
+            
         }
         $vueFormulaireUser=$formulaireUser->createView();
 
         return $this->render('out_of_office/modifierProfil.html.twig', ['vueFormulaire'=> $vueFormulaireUser,]);
-    }
-    //--------------------------Deconnexion--------------------------------------
-    /**
-     * @Route("/deconnexion", name="deconnexion")
-     */
-    public function deconnexion(): Response
-    {
-        return $this->render('out_of_office/deconnexion.html.twig', [
-            'controller_name' => 'OutOfOfficeController',
-            
-        ]);
     }
 
     //--------------------------Ajout d'un espace--------------------------------------
@@ -146,12 +147,15 @@ class OutOfOfficeController extends AbstractController
 
         $espace = new EspaceDeCoworking();
 
+        $user = $this->getUser();
+
         $formulaireEspace= $this->createForm(EspaceDeCoworkingType::class,$espace);
 
         $formulaireEspace->handleRequest($request); 
 
         if( $formulaireEspace->isSubmitted()  && $formulaireEspace->isValid())
         {
+            $espace->setIdUser($user);
             $espace->setNombrePlaceLibre($espace->getNombrePlace());
             $manager->persist($espace);
             $manager->flush();

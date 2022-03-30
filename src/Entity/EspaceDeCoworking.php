@@ -71,14 +71,14 @@ class EspaceDeCoworking
 
     /**
      * @ORM\Column(type="string", length=6)
-     * @Assert\Regex("#[0-24]h[0-59]#");
+     * @Assert\Regex(pattern="#([0-1]?[0-9]|2[0-3])h[0-5][0-9]#");
      * @Assert\NotBlank;
      */
     private $heureOuverture;
 
     /**
      * @ORM\Column(type="string", length=6)
-     * @Assert\Regex("#[0-24]h[0-59]#");
+     * @Assert\Regex(pattern="#([0-1]?[0-9]|2[0-3])h[0-5][0-9]#");
      * @Assert\NotBlank;
      */
     private $heureFermeture;
