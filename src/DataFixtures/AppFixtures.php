@@ -71,7 +71,91 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingAnglet->setLongitude(-1.5149935);
         
         $manager->persist($EspaceDeCoworkingAnglet);
-
+        $EspaceDeCoworkingToulouse = new EspaceDeCoworking();
+        $EspaceDeCoworkingToulouse->setUrl('....\public\Image\espace_de_coworking_toulouse');
+        $EspaceDeCoworkingToulouse->setTitre('Espace de coworking Toulouse');
+        $EspaceDeCoworkingToulouse->setPrix(20);
+        $EspaceDeCoworkingToulouse->setAdresse('140 rue des fur, Toulouse 64600');
+        $EspaceDeCoworkingToulouse->setDescriptif('Il est top');
+        $EspaceDeCoworkingToulouse->setImprimante(TRUE);
+        $EspaceDeCoworkingToulouse->setParking(TRUE);
+        $EspaceDeCoworkingToulouse->setCafe(FALSE);
+        $EspaceDeCoworkingToulouse->setHeureOuverture('08h00');
+        $EspaceDeCoworkingToulouse->setHeureFermeture('18h00');
+        $EspaceDeCoworkingToulouse->setNombrePlace(10);
+        $EspaceDeCoworkingToulouse->setNombrePlaceLibre(10);
+        $EspaceDeCoworkingToulouse->setLat(43.6044622);
+        $EspaceDeCoworkingToulouse->setLongitude(1.4442469);
+        
+        $manager->persist($EspaceDeCoworkingToulouse);
+        $EspaceDeCoworkingMarseille = new EspaceDeCoworking();
+        $EspaceDeCoworkingMarseille->setUrl('....\public\Image\espace_de_coworking_marseille');
+        $EspaceDeCoworkingMarseille->setTitre('Espace de coworking Marseille');
+        $EspaceDeCoworkingMarseille->setPrix(20);
+        $EspaceDeCoworkingMarseille->setAdresse('5 rue des pepep, Marseille 64600');
+        $EspaceDeCoworkingMarseille->setDescriptif('Il est la');
+        $EspaceDeCoworkingMarseille->setImprimante(TRUE);
+        $EspaceDeCoworkingMarseille->setParking(TRUE);
+        $EspaceDeCoworkingMarseille->setCafe(FALSE);
+        $EspaceDeCoworkingMarseille->setHeureOuverture('08h00');
+        $EspaceDeCoworkingMarseille->setHeureFermeture('18h00');
+        $EspaceDeCoworkingMarseille->setNombrePlace(10);
+        $EspaceDeCoworkingMarseille->setNombrePlaceLibre(10);
+        $EspaceDeCoworkingMarseille->setLat(43.2961743);
+        $EspaceDeCoworkingMarseille->setLongitude(5.3699525);
+        
+        $manager->persist($EspaceDeCoworkingMarseille);        
+        $EspaceDeCoworkingTruf = new EspaceDeCoworking();
+        $EspaceDeCoworkingTruf->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingTruf->setTitre('Espace de coworking Anglet');
+        $EspaceDeCoworkingTruf->setPrix(20);
+        $EspaceDeCoworkingTruf->setAdresse('140 rue des pitre, Anglet 64600');
+        $EspaceDeCoworkingTruf->setDescriptif('Il est bof');
+        $EspaceDeCoworkingTruf->setImprimante(TRUE);
+        $EspaceDeCoworkingTruf->setParking(TRUE);
+        $EspaceDeCoworkingTruf->setCafe(FALSE);
+        $EspaceDeCoworkingTruf->setHeureOuverture('08h00');
+        $EspaceDeCoworkingTruf->setHeureFermeture('18h00');
+        $EspaceDeCoworkingTruf->setNombrePlace(10);
+        $EspaceDeCoworkingTruf->setNombrePlaceLibre(10);
+        $EspaceDeCoworkingTruf->setLat(43.4813927);
+        $EspaceDeCoworkingTruf->setLongitude(6.5149935);
+        
+        $manager->persist($EspaceDeCoworkingTruf);        
+        $EspaceDeCoworkingLo = new EspaceDeCoworking();
+        $EspaceDeCoworkingLo->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingLo->setTitre('Espace de coworking Anglet');
+        $EspaceDeCoworkingLo->setPrix(20);
+        $EspaceDeCoworkingLo->setAdresse('140 rue des pitre, Anglet 64600');
+        $EspaceDeCoworkingLo->setDescriptif('Il est bof');
+        $EspaceDeCoworkingLo->setImprimante(TRUE);
+        $EspaceDeCoworkingLo->setParking(TRUE);
+        $EspaceDeCoworkingLo->setCafe(FALSE);
+        $EspaceDeCoworkingLo->setHeureOuverture('08h00');
+        $EspaceDeCoworkingLo->setHeureFermeture('18h00');
+        $EspaceDeCoworkingLo->setNombrePlace(10);
+        $EspaceDeCoworkingLo->setNombrePlaceLibre(10);
+        $EspaceDeCoworkingLo->setLat(43.813927);
+        $EspaceDeCoworkingLo->setLongitude(4.5149935);
+        
+        $manager->persist($EspaceDeCoworkingLo);
+        $EspaceDeCoworkingTo = new EspaceDeCoworking();
+        $EspaceDeCoworkingTo->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingTo->setTitre('Espace de coworking Anglet');
+        $EspaceDeCoworkingTo->setPrix(20);
+        $EspaceDeCoworkingTo->setAdresse('140 rue des pitre, Anglet 64600');
+        $EspaceDeCoworkingTo->setDescriptif('Il est bof');
+        $EspaceDeCoworkingTo->setImprimante(TRUE);
+        $EspaceDeCoworkingTo->setParking(TRUE);
+        $EspaceDeCoworkingTo->setCafe(FALSE);
+        $EspaceDeCoworkingTo->setHeureOuverture('08h00');
+        $EspaceDeCoworkingTo->setHeureFermeture('18h00');
+        $EspaceDeCoworkingTo->setNombrePlace(10);
+        $EspaceDeCoworkingTo->setNombrePlaceLibre(10);
+        $EspaceDeCoworkingTo->setLat(43.83927);
+        $EspaceDeCoworkingTo->setLongitude(4.149935);
+        
+        $manager->persist($EspaceDeCoworkingTo);
         $manager->flush();
 
     }
