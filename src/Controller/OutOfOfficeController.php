@@ -65,9 +65,12 @@ class OutOfOfficeController extends AbstractController
      */
     public function options(): Response
     {
+        $user = $this->getUser();
+        $idUser = $user->getId();
 
         return $this->render('out_of_office/options.html.twig', [
             'controller_name' => 'OutOfOfficeController',
+            'identifiant'=>$idUser,
  
 
             
