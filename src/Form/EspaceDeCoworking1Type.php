@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class EspaceDeCoworkingType extends AbstractType
+class EspaceDeCoworking1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

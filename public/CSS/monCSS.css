@@ -236,5 +236,11 @@ ul
 
 footer
 {
-position:absolute;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  padding-top: 10px;
+  font-size: 1.3em;
 }

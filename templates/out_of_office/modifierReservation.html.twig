@@ -3,6 +3,9 @@
 
 {% block body %}
 
+
+{% if action =="ajouter"%}
+
 <div>
         <center><h1 class="display-4">Modification de la reservation</h1></center>
 </div>
@@ -23,4 +26,7 @@
 <button type="submit" class="btn btn-dark">Enregistrer</button>
 {{ form_end(vueFormulaire) }}
 
+{% else %}
+
+{% endif %}
 {% endblock %} 

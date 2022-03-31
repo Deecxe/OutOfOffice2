@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EspaceDeCoworking{% endblock %}
+
+{% block body %}
+    <h1>Modifier Espace de Coworking</h1>
+
+    {{ include('espace_de_coworking/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('espace_de_coworking/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_espace_de_coworking_index',{id:identifiant}) }}">Retour</a>
+{% endblock %}

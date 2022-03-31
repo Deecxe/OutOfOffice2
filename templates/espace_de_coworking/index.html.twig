@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EspaceDeCoworking index{% endblock %}
+
+{% block body %}
+    <h1>EspaceDeCoworking index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Adresse</th>
+                <th>Descriptif</th>
+                <th>Imprimante</th>
+                <th>Parking</th>
+                <th>Cafe</th>
+                <th>HeureOuverture</th>
+                <th>HeureFermeture</th>
+                <th>NombrePlace</th>
+                <th>NombrePlaceLibre</th>
+                <th>Lat</th>
+                <th>Longitude</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for espace_de_coworking in espace_de_coworkings %}
+            <tr>
+                <td>{{ espace_de_coworking.id }}</td>
+                <td>{{ espace_de_coworking.url }}</td>
+                <td>{{ espace_de_coworking.titre }}</td>
+                <td>{{ espace_de_coworking.prix }}</td>
+                <td>{{ espace_de_coworking.adresse }}</td>
+                <td>{{ espace_de_coworking.descriptif }}</td>
+                <td>{{ espace_de_coworking.imprimante ? 'Yes' : 'No' }}</td>
+                <td>{{ espace_de_coworking.parking ? 'Yes' : 'No' }}</td>
+                <td>{{ espace_de_coworking.cafe ? 'Yes' : 'No' }}</td>
+                <td>{{ espace_de_coworking.heureOuverture }}</td>
+                <td>{{ espace_de_coworking.heureFermeture }}</td>
+                <td>{{ espace_de_coworking.nombrePlace }}</td>
+                <td>{{ espace_de_coworking.nombrePlaceLibre }}</td>
+                <td>{{ espace_de_coworking.lat }}</td>
+                <td>{{ espace_de_coworking.longitude }}</td>
+                <td>
+                    <a href="{{ path('app_espace_de_coworking_show', {'id': espace_de_coworking.id}) }}">Afficher</a>
+                    <a href="{{ path('app_espace_de_coworking_edit', {'id': espace_de_coworking.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">Aucun espace enregistrer</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

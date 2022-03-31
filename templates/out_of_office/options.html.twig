@@ -10,15 +10,11 @@
 
 
 {% if is_granted ('ROLE_USER') %}
-<form action={{path('reservation',{id:identifiant})}} method="get">
+<form action={{path('app_reservation_index',{id:identifiant})}} method="get">
 <button type="submit">Modifier une réservation</button>
 </form>
 <br>
-<form action={{path('Accueil')}} method="get">
-<button type="submit">Annuler une réservation</button>
-</form>
-<br>
-<form action={{path('Accueil')}} method="get">
+<form action={{path('app_facture_index')}} method="get">
 <button type="submit">Consulter factures reçues</button>
 </form>
 <br>
@@ -34,6 +30,10 @@
 {% if is_granted ('ROLE_GERANT') %}
 <form action={{path('ajoutEspace')}} method="get">
 <button type="submit">Ajouter un espace</button>
+</form>
+<br>
+<form action={{path('app_espace_de_coworking_index',{id:identifiant})}} method="get">
+<button type="submit">Gerer ses espaces</button>
 </form>
 <br>
 {% endif %}

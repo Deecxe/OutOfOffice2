@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EspaceDeCoworking{% endblock %}
+
+{% block body %}
+    <h1>EspaceDeCoworking</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ espace_de_coworking.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ espace_de_coworking.url }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ espace_de_coworking.titre }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ espace_de_coworking.prix }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ espace_de_coworking.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Descriptif</th>
+                <td>{{ espace_de_coworking.descriptif }}</td>
+            </tr>
+            <tr>
+                <th>Imprimante</th>
+                <td>{{ espace_de_coworking.imprimante ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Parking</th>
+                <td>{{ espace_de_coworking.parking ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Cafe</th>
+                <td>{{ espace_de_coworking.cafe ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>HeureOuverture</th>
+                <td>{{ espace_de_coworking.heureOuverture }}</td>
+            </tr>
+            <tr>
+                <th>HeureFermeture</th>
+                <td>{{ espace_de_coworking.heureFermeture }}</td>
+            </tr>
+            <tr>
+                <th>NombrePlace</th>
+                <td>{{ espace_de_coworking.nombrePlace }}</td>
+            </tr>
+            <tr>
+                <th>NombrePlaceLibre</th>
+                <td>{{ espace_de_coworking.nombrePlaceLibre }}</td>
+            </tr>
+            <tr>
+                <th>Lat</th>
+                <td>{{ espace_de_coworking.lat }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ espace_de_coworking.longitude }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_espace_de_coworking_index',{id:identifiant}) }}">Retour</a>
+
+    <a href="{{ path('app_espace_de_coworking_edit', {'id': espace_de_coworking.id}) }}">Modifier</a>
+
+    {{ include('espace_de_coworking/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier reservation{% endblock %}
+
+{% block body %}
+    <h1>Modifier reservation</h1>
+
+    {{ include('reservation/_form.html.twig', {'button_label': 'Mettre a jour'}) }}
+
+    <a href="{{ path('app_reservation_index') }}">Retour</a>
+
+{% endblock %}

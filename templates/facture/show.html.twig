@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <h1>Facture</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numero facture</th>
+                <td>{{ facture.id }}</td>
+                <th>Numero reservation</th>
+                <td>{{ facture.idReservation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_facture_index') }}">Retour</a>
+
+{% endblock %}
