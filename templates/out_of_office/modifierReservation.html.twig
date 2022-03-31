@@ -1,1 +1,26 @@
+{% extends 'base.html.twig' %}
 
+
+{% block body %}
+
+<div>
+        <center><h1 class="display-4">Modification de la reservation</h1></center>
+</div>
+
+
+<br>
+
+{{ form_start(vueFormulaire, {'attr':{"novalidate":"novalidate"}})}}
+
+{{ form_row(vueFormulaire.date)}}
+
+{{ form_row(vueFormulaire.heureDebut)}}
+
+{{ form_row(vueFormulaire.heureFin)}}
+
+{{ form_row(vueFormulaire.nombrePlaceReservees)}}
+
+<button type="submit" class="btn btn-dark">Enregistrer</button>
+{{ form_end(vueFormulaire) }}
+
+{% endblock %} 

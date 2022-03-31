@@ -12,26 +12,16 @@ Accueil
 </h1>
 <div class="slideshow-container">
 
-  <div class="mySlides fade">
-    <img src="http://www.lemansinnovation.fr/wp-content/uploads/2017/08/espace-de-coworking.jpg" style="width:100%">
-  </div>
+{% for coworking in espaceDeCoworking %}
 
   <div class="mySlides fade">
-    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-2.jpg" style="width:100%">
+    <img src="{{coworking.url}}" width = "1280" height = "550" alt="">
   </div>
-
-  <div class="mySlides fade">
-    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-3.jpg" style="width:100%">
-  </div>
+{% endfor %}
 
 </div>
 <br>
 
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-</div>
 
 <script>
 var slideIndex = 0;

@@ -23,7 +23,11 @@ class Reservation
     private $cout;
 
     /**
+<<<<<<< HEAD
      * @ORM\Column(ype="string", length=13)
+=======
+     * @ORM\Column(type="string", length=13)
+>>>>>>> 314e055b8504bdceb5c369e4abd019ddfd562c16
      */
     private $date;
 
@@ -69,12 +73,12 @@ class Reservation
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 
