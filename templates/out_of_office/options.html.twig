@@ -10,7 +10,7 @@
 
 
 {% if is_granted ('ROLE_USER') %}
-<form action={{path('Accueil')}} method="get">
+<form action={{path('reservation',{id:identifiant})}} method="get">
 <button type="submit">Modifier une réservation</button>
 </form>
 <br>

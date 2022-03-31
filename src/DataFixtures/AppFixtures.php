@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\EspaceDeCoworking;
 use App\Entity\User;
+use App\Entity\Reservation;
 
 class AppFixtures extends Fixture
 {
@@ -156,6 +157,17 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingTo->setLongitude(4.149935);
         
         $manager->persist($EspaceDeCoworkingTo);
+
+        $reservation1 = new Reservation();
+        $reservation1->setCout('15');
+        $reservation1->setDate('31/03/2022');
+        $reservation1->setHeureDebut('8h15');
+        $reservation1->setHeureFin('18h15');
+        $reservation1->setNombrePlaceReservees(1);
+        $reservation1->setIdUser(29);
+        $reservation1->setIdEspace(92);
+        
+        $manager->persist($reservation1);
         $manager->flush();
 
     }

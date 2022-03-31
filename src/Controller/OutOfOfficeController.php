@@ -20,6 +20,7 @@ use App\Entity\Facture;
 
 use App\Repository\EspaceDeCoworkingRepository;
 use App\Repository\UserRepository;
+use App\Repository\ReservationRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\EspaceDeCoworkingType;
 use App\Form\UserType;
 use App\Form\UserModifType;
+use App\Form\ReservationType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -78,14 +80,29 @@ class OutOfOfficeController extends AbstractController
     }
     //--------------------------Modifier reservation--------------------------------------
     /**
-     * @Route("/options/modifierReservation/{id}", name="modifierReservation")
+     * @Route("/options/reservation/modifierReservation/{id}", name="modifierReservation")
      */
-    public function modifierReservation(): Response
+    public function modifierReservation(Request $request, EntityManagerInterface $manager,Reservation $reservation): Response
     {
-        return $this->render('out_of_office/modifierReservation.html.twig', [
-            'controller_name' => 'OutOfOfficeController',
+
+        $formulaireReservation= $this->createForm(ReservationType::class,$reservation);
+
+        $formulaireReservation->handleRequest($request);
+
+        if( $formulaireReservation->isSubmitted())
+        {
+                $reservation = $formulaireReservation->getData();
+
+                $manager->persist($reservation);
+                $manager->flush();
+
+                return $this -> redirectToRoute('Accueil');
             
-        ]);
+        }
+        $vueformulaireReservation=$formulaireReservation->createView();
+
+        return $this->render('out_of_office/modifierReservation.html.twig', ['vueFormulaire'=> $vueformulaireReservation]);
+            
     }
     //--------------------------Annuler une réservation--------------------------------------
     /**
@@ -173,7 +190,7 @@ class OutOfOfficeController extends AbstractController
 
       //--------------------------Modifier un espace--------------------------------------
     /**
-     * @Route("/gerant/options/Modifier un espace", name="modifEspace")
+     * @Route("/gerant/options/ModifierUnEspace", name="modifEspace")
      */
     public function modifEspace(Request $request, EntityManagerInterface $manager): Response
     {
@@ -233,5 +250,20 @@ class OutOfOfficeController extends AbstractController
 
 
         return $this->render('out_of_office/inscription.html.twig',['vueFormulaire'=> $vueformulaireUser]);
+    }
+    //--------------------------Liste reservation--------------------------------------
+     /**
+     * @Route("/options/reservation/{id}", name="reservation")
+     */
+    public function formation(ReservationRepository $repositoryReservation): Response
+    {
+        if( !$this->getUser())
+        {
+            return $this->redirectToRoute('app_login');
+        }
+        
+        $reservations = $repositoryReservation->findAll();
+
+        return $this->render('out_of_office/listeReservation.html.twig', ['controller_name' => 'MetierController','reservations'=>$reservations]);
     }
 }

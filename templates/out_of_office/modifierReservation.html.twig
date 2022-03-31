@@ -1,1 +1,28 @@
+{% extends 'base.html.twig' %}
 
+
+{% block body %}
+
+<div>
+        <center><h1 class="display-4">Modification du profil</h1></center>
+</div>
+
+
+<br>
+
+{{ form_start(vueFormulaire, {'attr':{"novalidate":"novalidate"}})}}
+
+{{ form_row(vueFormulaire.nom)}}
+
+{{ form_row(vueFormulaire.prenom)}}
+
+{{ form_row(vueFormulaire.secteurActivite)}}
+
+{{ form_row(vueFormulaire.metier)}}
+
+{{ form_row(vueFormulaire.email)}}
+
+<button type="submit" class="btn btn-dark">Enregistrer</button>
+{{ form_end(vueFormulaire) }}
+
+{% endblock %} 
