@@ -63,24 +63,25 @@
 
         {% endblock %}
 
-        {% block footer %}
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12"></div>       
-        </div>
-        <div class="row" >
-            <div class="col-md-4 col-sm-4 col-xs-12">
-            <p style="text-align:left">Sansebastien Thomas | Couture Timoteo | Dupond Bastien | Chauvel Arthur</p>
-            </div>
-            <div class="col-md-4 offset-md-4 col-sm-4 offset-sm-4 col-xs-12">
-            <p style="text-align:right">2022 | 2023 DUT Informatique</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12"></div>       
-        </div>
-    </div>
+        
+        <div class="row" style="background-color: #080044; border: 2px solid #080044; color: white; bottom:0">
+            <!-- BLOC FOOTER DE LA PAGE -->
+            {% block footer %}
+                <!-- Creation premiere colonne -->
+                <div class="col-md-6 col-xs-12">
+                    <p style="text-align:left">Sansebastien Thomas | Couture Timoteo | Dupond Bastien | Chauvel Arthur</p>
+                </div>
 
-        {% endblock %}
+                <!-- Creation deuxieme colonne -->
+                <div class="col-md-6 col-xs-12" style="text-align: center;">
+                    <p style="text-align:right">2022 | 2023 DUT Informatique</p>
+                </div>
+
+                <p>Site réalisé avec les frameworks <a href="https://symfony.com/" style="color: white">Symfony</a> et <a href="https://getbootstrap.com/" style="color: white">Bootstrap</p>
+            {% endblock %}
+        </div>
+
+        
         
     {% block JavaScript %}
     

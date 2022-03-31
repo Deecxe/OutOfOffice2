@@ -227,6 +227,13 @@ ul
   border-top-color: white!important;
 }
 
+[class=row]
+{
+    text-align: center;
+    line-height: 30px;
+    border-radius: 6px;
+}
+
 footer
 {
 position:absolute;

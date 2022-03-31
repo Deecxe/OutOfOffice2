@@ -158,9 +158,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($EspaceDeCoworkingTo);
 
-<<<<<<< HEAD
-
-=======
         $reservation1 = new Reservation();
         $reservation1->setCout('15');
         $reservation1->setDate('31/03/2022');
@@ -171,7 +168,6 @@ class AppFixtures extends Fixture
         $reservation1->setIdEspace($reservation1->getIdEspace());
 
         $manager->persist($reservation1);
->>>>>>> 314e055b8504bdceb5c369e4abd019ddfd562c16
         $manager->flush();
 
     }

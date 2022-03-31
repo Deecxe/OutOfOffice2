@@ -12,21 +12,30 @@ Accueil
 </h1>
 <div class="slideshow-container">
 
-{% for coworking in espaceDeCoworking %}
+  <div class="mySlides fade">
+    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-1.jpg" style="width:100%">
+  </div>
 
   <div class="mySlides fade">
-    <img src="{{coworking.url}}" width = "1280" height = "550" alt="">
+    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-2.jpg" style="width:100%">
   </div>
-{% endfor %}
+
+  <div class="mySlides fade">
+    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-3.jpg" style="width:100%">
+  </div>
 
 </div>
 <br>
 
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
 
 <script>
 var slideIndex = 0;
 showSlides();
-
 function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");

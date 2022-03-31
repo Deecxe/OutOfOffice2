@@ -23,11 +23,7 @@ class Reservation
     private $cout;
 
     /**
-<<<<<<< HEAD
-     * @ORM\Column(ype="string", length=13)
-=======
      * @ORM\Column(type="string", length=13)
->>>>>>> 314e055b8504bdceb5c369e4abd019ddfd562c16
      */
     private $date;
 

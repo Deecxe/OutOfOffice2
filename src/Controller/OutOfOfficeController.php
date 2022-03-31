@@ -285,4 +285,6 @@ class OutOfOfficeController extends AbstractController
 
         return $this->render('out_of_office/listeReservation.html.twig', ['controller_name' => 'MetierController','reservations'=>$reservations]);
     }
+
+    
 }
