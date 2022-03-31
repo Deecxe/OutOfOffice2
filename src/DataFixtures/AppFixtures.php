@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
         $manager->persist($bastien);
 
         $EspaceDeCoworkingBayonne = new EspaceDeCoworking();
-        $EspaceDeCoworkingBayonne->setUrl('....\public\Image\espace_de_coworking_bayonne');
+        $EspaceDeCoworkingBayonne->setUrl('\Image\espace_de_coworking\espace43.jpg');
         $EspaceDeCoworkingBayonne->setTitre('Espace de coworking Bayonne');
         $EspaceDeCoworkingBayonne->setPrix(50);
         $EspaceDeCoworkingBayonne->setAdresse('126 rue des potes, Bayonne 64100');
@@ -56,11 +56,11 @@ class AppFixtures extends Fixture
         $manager->persist($EspaceDeCoworkingBayonne);
 
         $EspaceDeCoworkingAnglet = new EspaceDeCoworking();
-        $EspaceDeCoworkingAnglet->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingAnglet->setUrl('\Image\espace_de_coworking\espace44.jpg');
         $EspaceDeCoworkingAnglet->setTitre('Espace de coworking Anglet');
         $EspaceDeCoworkingAnglet->setPrix(20);
         $EspaceDeCoworkingAnglet->setAdresse('140 rue des pitre, Anglet 64600');
-        $EspaceDeCoworkingAnglet->setDescriptif('Il est bof');
+        $EspaceDeCoworkingAnglet->setDescriptif('Il est spatieux');
         $EspaceDeCoworkingAnglet->setImprimante(TRUE);
         $EspaceDeCoworkingAnglet->setParking(TRUE);
         $EspaceDeCoworkingAnglet->setCafe(FALSE);
@@ -70,10 +70,10 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingAnglet->setNombrePlaceLibre(10);
         $EspaceDeCoworkingAnglet->setLat(43.4813927);
         $EspaceDeCoworkingAnglet->setLongitude(-1.5149935);
-        
+
         $manager->persist($EspaceDeCoworkingAnglet);
         $EspaceDeCoworkingToulouse = new EspaceDeCoworking();
-        $EspaceDeCoworkingToulouse->setUrl('....\public\Image\espace_de_coworking_toulouse');
+        $EspaceDeCoworkingToulouse->setUrl('\Image\espace_de_coworking\espace45.jpg');
         $EspaceDeCoworkingToulouse->setTitre('Espace de coworking Toulouse');
         $EspaceDeCoworkingToulouse->setPrix(20);
         $EspaceDeCoworkingToulouse->setAdresse('140 rue des fur, Toulouse 64600');
@@ -87,14 +87,14 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingToulouse->setNombrePlaceLibre(10);
         $EspaceDeCoworkingToulouse->setLat(43.6044622);
         $EspaceDeCoworkingToulouse->setLongitude(1.4442469);
-        
+
         $manager->persist($EspaceDeCoworkingToulouse);
         $EspaceDeCoworkingMarseille = new EspaceDeCoworking();
-        $EspaceDeCoworkingMarseille->setUrl('....\public\Image\espace_de_coworking_marseille');
+        $EspaceDeCoworkingMarseille->setUrl('\Image\espace_de_coworking\espace46.jpg');
         $EspaceDeCoworkingMarseille->setTitre('Espace de coworking Marseille');
         $EspaceDeCoworkingMarseille->setPrix(20);
         $EspaceDeCoworkingMarseille->setAdresse('5 rue des pepep, Marseille 64600');
-        $EspaceDeCoworkingMarseille->setDescriptif('Il est la');
+        $EspaceDeCoworkingMarseille->setDescriptif('Il est nice');
         $EspaceDeCoworkingMarseille->setImprimante(TRUE);
         $EspaceDeCoworkingMarseille->setParking(TRUE);
         $EspaceDeCoworkingMarseille->setCafe(FALSE);
@@ -104,14 +104,14 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingMarseille->setNombrePlaceLibre(10);
         $EspaceDeCoworkingMarseille->setLat(43.2961743);
         $EspaceDeCoworkingMarseille->setLongitude(5.3699525);
-        
+
         $manager->persist($EspaceDeCoworkingMarseille);        
         $EspaceDeCoworkingTruf = new EspaceDeCoworking();
-        $EspaceDeCoworkingTruf->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingTruf->setUrl('\Image\espace_de_coworking\espace47.jpg');
         $EspaceDeCoworkingTruf->setTitre('Espace de coworking Anglet');
         $EspaceDeCoworkingTruf->setPrix(20);
         $EspaceDeCoworkingTruf->setAdresse('140 rue des pitre, Anglet 64600');
-        $EspaceDeCoworkingTruf->setDescriptif('Il est bof');
+        $EspaceDeCoworkingTruf->setDescriptif('Il est cool');
         $EspaceDeCoworkingTruf->setImprimante(TRUE);
         $EspaceDeCoworkingTruf->setParking(TRUE);
         $EspaceDeCoworkingTruf->setCafe(FALSE);
@@ -121,10 +121,10 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingTruf->setNombrePlaceLibre(10);
         $EspaceDeCoworkingTruf->setLat(43.4813927);
         $EspaceDeCoworkingTruf->setLongitude(6.5149935);
-        
+
         $manager->persist($EspaceDeCoworkingTruf);        
         $EspaceDeCoworkingLo = new EspaceDeCoworking();
-        $EspaceDeCoworkingLo->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingLo->setUrl('\Image\espace_de_coworking\espace47.jpg');
         $EspaceDeCoworkingLo->setTitre('Espace de coworking Anglet');
         $EspaceDeCoworkingLo->setPrix(20);
         $EspaceDeCoworkingLo->setAdresse('140 rue des pitre, Anglet 64600');
@@ -138,10 +138,10 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingLo->setNombrePlaceLibre(10);
         $EspaceDeCoworkingLo->setLat(43.813927);
         $EspaceDeCoworkingLo->setLongitude(4.5149935);
-        
+
         $manager->persist($EspaceDeCoworkingLo);
         $EspaceDeCoworkingTo = new EspaceDeCoworking();
-        $EspaceDeCoworkingTo->setUrl('....\public\Image\espace_de_coworking_anglet');
+        $EspaceDeCoworkingTo->setUrl('\Image\espace_de_coworking\espace47.jpg');
         $EspaceDeCoworkingTo->setTitre('Espace de coworking Anglet');
         $EspaceDeCoworkingTo->setPrix(20);
         $EspaceDeCoworkingTo->setAdresse('140 rue des pitre, Anglet 64600');
@@ -155,7 +155,7 @@ class AppFixtures extends Fixture
         $EspaceDeCoworkingTo->setNombrePlaceLibre(10);
         $EspaceDeCoworkingTo->setLat(43.83927);
         $EspaceDeCoworkingTo->setLongitude(4.149935);
-        
+
         $manager->persist($EspaceDeCoworkingTo);
 
         $reservation1 = new Reservation();
@@ -164,9 +164,9 @@ class AppFixtures extends Fixture
         $reservation1->setHeureDebut('8h15');
         $reservation1->setHeureFin('18h15');
         $reservation1->setNombrePlaceReservees(1);
-        $reservation1->setIdUser(29);
-        $reservation1->setIdEspace(92);
-        
+        $reservation1->setIdUser($reservation1->getIdUser());
+        $reservation1->setIdEspace($reservation1->getIdEspace());
+
         $manager->persist($reservation1);
         $manager->flush();
 

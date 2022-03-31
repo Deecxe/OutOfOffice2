@@ -226,3 +226,8 @@ ul
 {
   border-top-color: white!important;
 }
+
+footer
+{
+position:absolute;
+}
