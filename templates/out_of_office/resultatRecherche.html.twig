@@ -9,20 +9,14 @@
     {% endblock %}
 {% block body %}
     <div class="container">
-            <div class="list">
+            <div class="list" >
                 {% for coworking in espaceDeCoworking %}
                     <div class="item js-marker" data-lat="{{coworking.lat}}" data-lng="{{coworking.longitude}}" data-price="{{coworking.prix}}">
-                        <img src="https://via.placeholder.com/400x260" alt="">
+                        <img src="{{coworking.url}}" width = "400" height = "260" alt="">
                         <h4> {{coworking.titre}} </h4>
                         <p>
-                            {{coworking.prix}}
-                            {{coworking.cafe}}
-                            {{coworking.adresse}}
-                            {{coworking.descriptif}}
-                            {{coworking.heureOuverture}}
-                            {{coworking.heureFermeture}}
-
-
+                            Prix de la réservation : {{coworking.prix}} € <br>
+                            Adresse : {{coworking.adresse}}
                         </p>
                     </div>
                 {% endfor %}

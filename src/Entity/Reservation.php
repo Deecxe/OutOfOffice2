@@ -23,7 +23,7 @@ class Reservation
     private $cout;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(ype="string", length=13)
      */
     private $date;
 

@@ -41,8 +41,11 @@ class OutOfOfficeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('out_of_office/index.html.twig', [
-            'controller_name' => 'OutOfOfficeController',
+        $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
+
+        $espaceDeCoworking = $repositoryEspaceDeCoworking->findAll();
+
+        return $this->render('out_of_office/index.html.twig',['espaceDeCoworking'=>$espaceDeCoworking
         ]);
     }
 
@@ -58,6 +61,22 @@ class OutOfOfficeController extends AbstractController
     
         return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworking]);
     }
+
+    //--------------------------Détails recherche--------------------------------------
+    /**
+     * @Route("/detailsRecherche", name="detailsRecherche")
+     */
+    public function detailsRecherche(): Response
+    {
+        $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
+        
+        $espaceDeCoworking = $repositoryEspaceDeCoworking->findAll();
+    
+        return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworking]);
+    }
+
+
+
 
     //--------------------------Options--------------------------------------
     /**
