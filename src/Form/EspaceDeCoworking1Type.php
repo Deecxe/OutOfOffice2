@@ -9,7 +9,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Mime\MimeTypes;
+
+
 
 class EspaceDeCoworking1Type extends AbstractType
 {
@@ -17,6 +22,9 @@ class EspaceDeCoworking1Type extends AbstractType
     {
         $builder
             ->add('url')
+            ->add('imageFile', FileType::class,[
+                'required' => false
+            ])
             ->add('titre')
             ->add('prix')
             ->add('adresse')
