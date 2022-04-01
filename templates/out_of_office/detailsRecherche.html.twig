@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>
+        <img src="{{espaceDeCoworking.url}}" width = "800" height = "360" alt="">
+    </h1>
+    <li class="list-group-item">Nom de l'espace : {{espaceDeCoworking.titre}}</li>
+    <li class="list-group-item">Prix : {{espaceDeCoworking.prix}}</li>
+    <li class="list-group-item">Adresse : {{espaceDeCoworking.adresse}}</li>
+    <li class="list-group-item">Descriptif : {{espaceDeCoworking.descriptif}}</li>
+    <li class="list-group-item">Heure d'ouverture : {{espaceDeCoworking.heureOuverture}}</li>
+    <li class="list-group-item">Heure de fermeture : {{espaceDeCoworking.heureFermeture}}</li>
+    <li class="list-group-item">Nombre de place : {{espaceDeCoworking.nombrePlace}}</li>
+    {% if espaceDeCoworking.imprimante is same as true %}
+    <li class="list-groupe-item">Il y a une imprimante</li>
+    {% else %}
+    <li class="list-groupe-item">Il n'y a pas d'imprimante</li>
+    {% endif %}
+    {% if espaceDeCoworking.parking is same as true %}
+    <li class="list-groupe-item">Il y a un parking</li>
+    {% else %}
+    <li class="list-groupe-item">Il n'y a pas de parking</li>
+    {% endif %}
+    {% if espaceDeCoworking.cafe is same as true %}
+    <li class="list-groupe-item">Il y a une machine à cafe</li>
+    {% else %}
+    <li class="list-groupe-item">Il n'y a pas de machine à cafe</li>
+    {% endif %}
+
+    <form action={{path('creeReservation',{id:espaceDeCoworking.id})}} method="get">
+    <button type="submit">Reserver</button>
+    </form>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

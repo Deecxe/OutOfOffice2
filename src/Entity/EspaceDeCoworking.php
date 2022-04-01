@@ -60,7 +60,7 @@ class EspaceDeCoworking
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank;
      * @Assert\Regex(pattern="#^[1-999]( )?(bis)?#", message="Le numéro de route semble incorrect");
-     * @Assert\Regex(pattern="#rue|boulevard|avenue|impasse|allée|place|voie|allee#i",message="Le type de voie/rue semble incorrect");
+     * @Assert\Regex(pattern="#rue|boulevard|avenue|impasse|allée|place|voie|allee|chemin#i",message="Le type de voie/rue semble incorrect");
      * @Assert\Regex(pattern="#[0-9]{5}#",message="Il semble y avoir un probleme avec le code postal");
      */
     private $adresse;
