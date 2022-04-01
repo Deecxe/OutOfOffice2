@@ -12,7 +12,9 @@
             <div class="list" >
                 {% for coworking in espaceDeCoworking %}
                     <div class="item js-marker" data-lat="{{coworking.lat}}" data-lng="{{coworking.longitude}}" data-price="{{coworking.prix}}">
-                        <img src="{{coworking.url}}" width = "400" height = "260" alt="">
+                        <a href={{path("detailsRecherche",{id:coworking.id})}}>
+                            <img src="{{coworking.url}}" width = "400" height = "260" alt="">
+                        </a>
                         <h4> {{coworking.titre}} </h4>
                         <p>
                             Prix de la réservation : {{coworking.prix}} € <br>
@@ -314,4 +316,6 @@
 
 
 
+{% endblock %}
+{% block footer %}
 {% endblock %}

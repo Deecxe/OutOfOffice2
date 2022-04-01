@@ -3,32 +3,23 @@
 
 {% block body %}
 
-
-{% if action =="ajouter"%}
-
-<div>
-        <center><h1 class="display-4">Modification de la reservation</h1></center>
-</div>
-
-
-<br>
-
 {{ form_start(vueFormulaire, {'attr':{"novalidate":"novalidate"}})}}
 
+<p> Choisir la date  : </p>
 {{ form_row(vueFormulaire.date)}}
 
+<p> De :</p>
 {{ form_row(vueFormulaire.heureDebut)}}
 
+<p> A :</p>
 {{ form_row(vueFormulaire.heureFin)}}
 
+<p> Combien de place à reserver ?</p>
 {{ form_row(vueFormulaire.nombrePlaceReservees)}}
 
-<button type="submit" class="btn btn-dark">Enregistrer</button>
+<button type="submit" class="btn btn-dark">Reserver</button>
 {{ form_end(vueFormulaire) }}
 
-{% else %}
-
-{% endif %}
-{% endblock %} 
+{% endblock %}
 {% block footer %}
 {% endblock %}
