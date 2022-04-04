@@ -18,35 +18,18 @@ class EspaceDeCoworkingController extends AbstractController
     /**
      * @Route("/{id}", name="app_espace_de_coworking_index", methods={"GET"})
      */
-    public function index(EspaceDeCoworkingRepository $espaceDeCoworkingRepository): Response
+    public function index(EspaceDeCoworkingRepository $espaceDeCoworkingRepository, $id): Response
     {
+        $espace = $espaceDeCoworkingRepository->findByIdUser($id);
+
         return $this->render('espace_de_coworking/index.html.twig', [
-            'espace_de_coworkings' => $espaceDeCoworkingRepository->findAll(),
+            'espace_de_coworkings' => $espace,
         ]);
     }
 
-    /**
-     * @Route("/new", name="app_espace_de_coworking_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, EspaceDeCoworkingRepository $espaceDeCoworkingRepository): Response
-    {
-        $espaceDeCoworking = new EspaceDeCoworking();
-        $form = $this->createForm(EspaceDeCoworking1Type::class, $espaceDeCoworking);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $espaceDeCoworkingRepository->add($espaceDeCoworking);
-            return $this->redirectToRoute('app_espace_de_coworking_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('espace_de_coworking/new.html.twig', [
-            'espace_de_coworking' => $espaceDeCoworking,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
-     * @Route("/{id}", name="app_espace_de_coworking_show", methods={"GET"})
+     * @Route("/show/{id}", name="app_espace_de_coworking_show", methods={"GET"})
      */
     public function show(EspaceDeCoworking $espaceDeCoworking): Response
     {
@@ -56,7 +39,7 @@ class EspaceDeCoworkingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_espace_de_coworking_edit", methods={"GET", "POST"})
+     * @Route("/edit/{id}", name="app_espace_de_coworking_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, EspaceDeCoworking $espaceDeCoworking, EspaceDeCoworkingRepository $espaceDeCoworkingRepository): Response
     {
@@ -75,7 +58,7 @@ class EspaceDeCoworkingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_espace_de_coworking_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="app_espace_de_coworking_delete", methods={"POST"})
      */
     public function delete(Request $request, EspaceDeCoworking $espaceDeCoworking, EspaceDeCoworkingRepository $espaceDeCoworkingRepository): Response
     {

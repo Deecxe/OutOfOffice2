@@ -265,7 +265,8 @@ class OutOfOfficeController extends AbstractController
             $reservations->setIdEspace($espaceDeCoworking);
 
             $prix = $espaceDeCoworking->getPrix();
-            $reservations->setCout($prix);
+            $nbPlace = $reservations->getNombrePlaceReservees();
+            $reservations->setCout($prix*$nbPlace);
 
             $manager->persist($reservations);
             $manager->flush();

@@ -1,13 +1,19 @@
+<center>
 <h3 class="titre">Paiement</h3>
 
 <form action={{path('Accueil')}} method="get">
-<label>Nom</label>
+<label>Nom :</label>
 <input type="text" name="nom"/>
-<label>Numero de carte</label>
+<br>
+<label>Numero de carte :</label>
 <input type="number_format" maxlenght="16" size="16" name="num"/>
-<label>Date d'expiration:</label>
+<br>
+<label>Date d'expiration :</label>
 <input type="date" name="date" />
-<label>CVV</label>
+<br>
+<label>CVV :</label>
 <input type="text" maxlenght="3" size="3" name="cvv"/>
+<br>
 <input type="submit" />
 </form>
+</center>
