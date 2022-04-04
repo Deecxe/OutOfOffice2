@@ -12,11 +12,11 @@
                 <td>{{ facture.id }}</td>
                 <th>Numero reservation</th>
                 <td>{{ facture.idReservation }}</td>
+                <th>Numero utilisateur</th>
+                <td>{{ facture.idUser }}</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_facture_index') }}">Retour</a>
 
 {% endblock %}
 {% block footer %}

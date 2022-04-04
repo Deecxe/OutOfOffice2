@@ -22,6 +22,11 @@ class Facture
      */
     private $idReservation;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $idUser;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -41,5 +46,17 @@ class Facture
     public function __toString()
     {
         return $this->getId();
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
     }
 }

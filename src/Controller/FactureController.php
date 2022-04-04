@@ -16,37 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class FactureController extends AbstractController
 {
     /**
-     * @Route("/", name="app_facture_index", methods={"GET"})
+     * @Route("/{id}", name="app_facture_index", methods={"GET"})
      */
-    public function index(FactureRepository $factureRepository): Response
+    public function index(FactureRepository $factureRepository,$id): Response
     {
+
+        $facture = $factureRepository->findByidUser($id);
         return $this->render('facture/index.html.twig', [
-            'factures' => $factureRepository->findAll(),
+            'factures' => $facture,
         ]);
     }
 
     /**
-     * @Route("/new", name="app_facture_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, FactureRepository $factureRepository): Response
-    {
-        $facture = new Facture();
-        $form = $this->createForm(FactureType::class, $facture);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $factureRepository->add($facture);
-            return $this->redirectToRoute('app_facture_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('facture/new.html.twig', [
-            'facture' => $facture,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="app_facture_show", methods={"GET"})
+     * @Route("/show/{id}", name="app_facture_show", methods={"GET"})
      */
     public function show(Facture $facture): Response
     {
@@ -56,7 +38,7 @@ class FactureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_facture_edit", methods={"GET", "POST"})
+     * @Route("/edit/{id}", name="app_facture_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Facture $facture, FactureRepository $factureRepository): Response
     {
@@ -75,7 +57,7 @@ class FactureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_facture_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="app_facture_delete", methods={"POST"})
      */
     public function delete(Request $request, Facture $facture, FactureRepository $factureRepository): Response
     {
