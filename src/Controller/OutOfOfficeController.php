@@ -270,7 +270,7 @@ class OutOfOfficeController extends AbstractController
             $manager->persist($reservations);
             $manager->flush();
 
-            return $this -> redirectToRoute('Accueil');
+            return $this -> render('out_of_office/paiement.html.twig', ['controller_name' => 'MetierController','espaceDeCoworking'=>$espaceDeCoworking,'reservation'=>$reservations,]);
         }
 
 
