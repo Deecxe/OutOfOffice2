@@ -8,12 +8,12 @@
     
     {% endblock %}
 {% block body %}
-    {#<div class = "jumbotron">
+    <div class = "jumbotron">
         <div class = "container">
         {{ form_start (form)}}
         <dic class="form_row">
             <div class = "col">
-            {{ form_row(form.prix)}}
+            {{ form_row(form.maxPrice)}}
             </div>
             <div class="col">
             {{ form_row(form.horaire)}}
@@ -22,7 +22,7 @@
             <button class="btn btn-primary"> Rechercher </button>
             </div>            
         </div>
-        {{ form_end (form)}}#}
+        {{ form_end (form)}}
     <div class="container">
             <div class="list" >
                 {% for coworking in espaceDeCoworking %}
