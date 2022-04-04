@@ -14,6 +14,7 @@ class EspaceSearchType extends AbstractType
         $builder
             ->add('maxPrice')
             ->add('horaire')
+            
         ;
     }
 
