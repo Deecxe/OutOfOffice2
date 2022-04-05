@@ -10,6 +10,7 @@
 <h1>
 Bienvenue sur Out Of Office 
 </h1>
+
 </center>
 
 
@@ -78,6 +79,29 @@ Bienvenue sur Out Of Office
 
 </div>
 
+<h4>
+Out Of Office est une application web de mise en relation de télétravailleurs et d’espaces de coworking. Out Of Office permet de rechercher l’espace collaboratif idéal pour chaque télétravailleur en s’appuyant sur différents critères de rechercher tels que la localisation, les horaires de disponibilité du télétravailleur et des options diverses et variées concernant les espaces collaboratifs comme la présence d’une imprimante, d’un parking, d’une machine à café, etc … Le site permet également, une fois l’espace de coworking idéal identifié, d’y réserver une place et de procéder au paiement directement à travers l’application. Out Of Office se démarque également par sa qualité de réseau social, l’application permettant aux clients, via un chat intégré, de discuter et de s’échanger des conseils ou des bonnes pratiques. Out Of Office gère également la partie « gestion » des espaces en donnant la possibilité aux gérant d’inscrire un nouvel espace ou d’en modifier un existant
+</h4>
+<h1> _________________________________________________________________________________________________________________________________________________________</h1>
+<br>
+<h3> Récemment ajouté : </h3>
+<br>
+<div>
+
+                {% for espace in espaceDeCoworkings %}
+                        <a href={{path("detailsRecherche",{id:espace.id})}}>
+                            <img src="{{espace.url}}" width = "400" height = "260" alt="">
+                        </a>
+                        <h4> {{espace.titre}} </h4>
+                        <p>
+                            Prix de la réservation : {{espace.prix}} € <br>
+                            Adresse : {{espace.adresse}},{{espace.ville}} {{espace.CodePostal}}
+                        </p>
+                    </div>
+                {% endfor %}
+</div>
+
+            
 
 
 {% endblock %}
