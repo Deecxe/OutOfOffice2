@@ -59,10 +59,8 @@ class OutOfOfficeController extends AbstractController
     //--------------------------Résultats recherche--------------------------------------
     /**
      * @Route("/resultatRecherche", name="resultatRecherche")
-     * @param EspaceDeCoworkingRepository $repository
-     * @return Response
      */
-    public function resultatRecherche(EspaceDeCoworkingRepository $repository, Request $request, PaginatorInterface $paginator): Response
+    public function resultatRecherche(EspaceDeCoworkingRepository $repository, Request $request): Response
     {
         $search = new EspaceSearch();
         $form = $this->createForm(EspaceSearchType::class, $search);

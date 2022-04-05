@@ -2,7 +2,21 @@
 
 {% block body %}
 <h1>Page de recherche</h1>
+
+{{ form(search_form)}}
 {% endblock %}
 
 {% block footer %}
+{% endblock %}
+
+{% block javascript %}
+
+{{ parent() }}
+
+<script>
+
+$(document).ready(function()) {
+    $('select').formSelect();
+    
+})
 {% endblock %}

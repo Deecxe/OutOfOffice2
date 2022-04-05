@@ -16,6 +16,11 @@ use Doctrine\ORM\QueryBuilder;
 
 
 use App\Entity\EspaceDeCoworking;
+use App\Entity\User;
+use App\Entity\Reservation;
+use App\Entity\Facture;
+use App\Entity\EspaceSearch;
+use App\Entity\Paiement;
 
 use App\Repository\EspaceDeCoworkingRepository;
 use App\Repository\UserRepository;
@@ -25,6 +30,14 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
+use App\Form\EspaceDeCoworking1Type;
+use App\Form\UserType;
+use App\Form\UserModifType;
+use App\Form\Reservation1Type;
+use App\Form\EspaceSearchType;
+use App\Form\PaiementType;
+use App\Form\SearchEspaceType;
+
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -32,11 +45,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/espace/search" , name="search_espace")
+     * @Route("/espace/search", name="search_espace")
      */
-    public function searchEspace(Request $request)
+    public function searchEspace(Request $request): Response
     {
-        return $this->render('search/espace.html.twig');
+        $searchEspaceForm = $this->createForm(SearchEspaceType::class);
+
+        $vueFormulaireRecherche=$searchEspaceForm->createView();
+
+
+        return $this->render('search/espace.html.twig', ['search_form'=>$vueFormulaireRecherche]);
     }
 }
 
