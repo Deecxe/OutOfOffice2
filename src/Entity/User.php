@@ -76,10 +76,16 @@ class User implements UserInterface
      */
     private $espaceDeCoworkings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="idUsers")
+     */
+    private $factures;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->espaceDeCoworkings = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,5 +298,35 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    /**
+     * @return Collection<int, Facture>
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Facture $facture): self
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures[] = $facture;
+            $facture->setIdUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): self
+    {
+        if ($this->factures->removeElement($facture)) {
+            // set the owning side to null (unless already changed)
+            if ($facture->getIdUsers() === $this) {
+                $facture->setIdUsers(null);
+            }
+        }
+
+        return $this;
     }
 }

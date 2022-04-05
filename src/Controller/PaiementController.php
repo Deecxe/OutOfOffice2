@@ -35,7 +35,7 @@ class PaiementController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager, PaiementRepository $paiementRepository, Reservation $reservations): Response
     {
         $user = $this->getUser();
-        
+
         $paiement = new Paiement();
         $form = $this->createForm(PaiementType::class, $paiement);
         $form->handleRequest($request);
@@ -45,11 +45,10 @@ class PaiementController extends AbstractController
 
             $facture = new Facture();
 
+            $facture->setIdUsers($user);
             
-            $facture->setIdUser($user);
-
-            $idreserv = $reservations->getId();
-            $facture->setIdReservation($idreserv);
+            $reservations->getId();
+            $facture->setIdReservationn($reservations);
 
             $manager->persist($facture);
             $manager->flush();
