@@ -1,90 +1,91 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         <h1 class="text-center">
+         Bienvenue sur Out Of Office 
+         </h1>
+   		<div class="row">
+				<div class="col-md-12">
+               <div class="slideshow">
 
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<center>
-<h1>
-Bienvenue sur Out Of Office 
-</h1>
+                     <style>
+                     .slideshow {
 
-</center>
+                        width: 1920px;
+
+                        height: 800px;
+
+                        overflow: hidden;
+
+                        border: 3px solid #F2F2F2;
+
+                     }
+
+                     .slideshow ul {
+
+                        /* 3 images donc 4 x 100% */
+
+                        width: 300%;
+
+                        height: 800px;
+
+                        padding:0; margin:0;
+
+                        list-style: none;
+
+                     }
+
+                     .slideshow li {
+
+                        float: left;
+
+                     }</style>
+
+                     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+                     <script type="text/javascript">
+
+                        $(function(){
+
+                           setInterval(function(){
+
+                              $(".slideshow ul").animate({marginLeft:-1970},800,function(){
+
+                                 $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
+
+                              })
+
+                           }, 3500);
+
+                        });
+
+                     </script>
+
+                     <ul>
+                     {% for espace in espaceDeCoworkings %}
+
+                     <li><img src="{{espace.url}}" alt="" width="1920" height="800" /></li> 
+
+                     {% endfor %}
+                     </ul>
+			   </div>
+			</div>
+         <h4>
+            Out Of Office est une application web de mise en relation de télétravailleurs et d’espaces de coworking. Out Of Office permet de rechercher l’espace collaboratif idéal pour chaque télétravailleur en s’appuyant sur différents critères de rechercher tels que la localisation, les horaires de disponibilité du télétravailleur et des options diverses et variées concernant les espaces collaboratifs comme la présence d’une imprimante, d’un parking, d’une machine à café, etc … Le site permet également, une fois l’espace de coworking idéal identifié, d’y réserver une place et de procéder au paiement directement à travers l’application. Out Of Office se démarque également par sa qualité de réseau social, l’application permettant aux clients, via un chat intégré, de discuter et de s’échanger des conseils ou des bonnes pratiques. Out Of Office gère également la partie « gestion » des espaces en donnant la possibilité aux gérant d’inscrire un nouvel espace ou d’en modifier un existant
+         </h4>
+         <br>
+         <h1> _________________________________________________________________________________________________________________________________________________________</h1>
+         <br>
 
 
-<div class="slideshow">
-
-<style>
-.slideshow {
-
-   width: 1920px;
-
-   height: 800px;
-
-   overflow: hidden;
-
-   border: 3px solid #F2F2F2;
-
-}
-
-.slideshow ul {
-
-    /* 3 images donc 4 x 100% */
-
-   width: 300%;
-
-   height: 800px;
-
-   padding:0; margin:0;
-
-   list-style: none;
-
-}
-
-.slideshow li {
-
-   float: left;
-
-}</style>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-
-   $(function(){
-
-      setInterval(function(){
-
-         $(".slideshow ul").animate({marginLeft:-1970},800,function(){
-
-            $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
-
-         })
-
-      }, 3500);
-
-   });
-
-</script>
-
-<ul>
-{% for espace in espaceDeCoworkings %}
-
-  <li><img src="{{espace.url}}" alt="" width="1920" height="800" /></li> 
-
-{% endfor %}
-</ul>
 
 </div>
-
-<h4>
-Out Of Office est une application web de mise en relation de télétravailleurs et d’espaces de coworking. Out Of Office permet de rechercher l’espace collaboratif idéal pour chaque télétravailleur en s’appuyant sur différents critères de rechercher tels que la localisation, les horaires de disponibilité du télétravailleur et des options diverses et variées concernant les espaces collaboratifs comme la présence d’une imprimante, d’un parking, d’une machine à café, etc … Le site permet également, une fois l’espace de coworking idéal identifié, d’y réserver une place et de procéder au paiement directement à travers l’application. Out Of Office se démarque également par sa qualité de réseau social, l’application permettant aux clients, via un chat intégré, de discuter et de s’échanger des conseils ou des bonnes pratiques. Out Of Office gère également la partie « gestion » des espaces en donnant la possibilité aux gérant d’inscrire un nouvel espace ou d’en modifier un existant
-</h4>
-<h1> _________________________________________________________________________________________________________________________________________________________</h1>
-<br>
-<h3> Récemment ajouté : </h3>
+<div class="row">
+<div class="col-md-12">
+   <h3> Récemment ajouté : </h3>
 <br>
 <div>
 
