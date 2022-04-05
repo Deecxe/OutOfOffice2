@@ -20,6 +20,7 @@ use App\Entity\User;
 use App\Entity\Reservation;
 use App\Entity\Facture;
 use App\Entity\EspaceSearch;
+use App\Entity\Paiement;
 
 use App\Repository\EspaceDeCoworkingRepository;
 use App\Repository\UserRepository;
@@ -34,6 +35,7 @@ use App\Form\UserType;
 use App\Form\UserModifType;
 use App\Form\Reservation1Type;
 use App\Form\EspaceSearchType;
+use App\Form\PaiementType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -68,11 +70,9 @@ class OutOfOfficeController extends AbstractController
         $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
 
         
-        $espaceDeCoworking = $paginator->paginate(
-            $this -> $repository -> findAllVisibleQuery($search)
-        );
+        $espaceDeCoworkings = $repositoryEspaceDeCoworking->findAll();
     
-        return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworking, 'form' => $form->createView()]);
+        return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworkings, 'form' => $form->createView()]);
     }
 
     //--------------------------Détails recherche--------------------------------------
@@ -154,8 +154,7 @@ class OutOfOfficeController extends AbstractController
         {
             $espace->setIdUser($user);
             $espace->setNombrePlaceLibre($espace->getNombrePlace());
-            $adresse = $espace->getAdresse();
-            "https://api-adresse.data.gouv.fr/search/?q=".$adresse."";
+
             $manager->persist($espace);
             $manager->flush();
             return $this -> redirectToRoute('Accueil');
@@ -281,10 +280,15 @@ class OutOfOfficeController extends AbstractController
             $nbPlace = $reservations->getNombrePlaceReservees();
             $reservations->setCout($prix*$nbPlace);
 
+            
             $manager->persist($reservations);
             $manager->flush();
 
-            return $this->render('out_of_office/paiement.html.twig', ['controller_name' => 'MetierController','espaceDeCoworking'=>$espaceDeCoworking,'reservation'=>$reservations]);
+            $id = $reservations->getId();
+            
+            return $this -> redirectToRoute('app_paiement_new',['reservation'=>$reservations,'id'=>$id]);
+   
+
         }
 
 

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <center>
+    <p>
+    Vous allez reserver l'espace : {{reservation.idEspace}}
+    <br>
+    Le : {{reservation.date}}
+    <br>
+    De {{reservation.heureDebut}} à {{reservation.heureFin}}
+    <br>
+    Pour {{reservation.nombrePlaceReservees}} personnes.
+    <br>
+
+    Prix à payer : {{reservation.cout}} €
+    <br>
+    </p>
+    </center>
+    <h1>Formulaire de paiement</h1>
+    {{ include('paiement/_form.html.twig') }}
+
+{% endblock %}
