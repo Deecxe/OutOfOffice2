@@ -87,10 +87,10 @@
 <div class="col-md-12">
    <h3> Récemment ajouté : </h3>
 <br>
-<div>
-
+<div class="row">
                 {% for espace in espaceDeCoworkings %}
-                        <a href={{path("detailsRecherche",{id:espace.id})}}>
+                <div class="col-md-6">
+                    <a href={{path("detailsRecherche",{id:espace.id})}}>
                             <img src="{{espace.url}}" width = "400" height = "260" alt="">
                         </a>
                         <h4> {{espace.titre}} </h4>
@@ -98,9 +98,19 @@
                             Prix de la réservation : {{espace.prix}} € <br>
                             Adresse : {{espace.adresse}},{{espace.ville}} {{espace.CodePostal}}
                         </p>
-                    </div>
-                {% endfor %}
+				      </div>
+                   {% endfor %}
+         </div>
+
+         </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
             
 
