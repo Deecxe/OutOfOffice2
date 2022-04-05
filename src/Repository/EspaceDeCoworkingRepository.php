@@ -74,19 +74,26 @@ class EspaceDeCoworkingRepository extends ServiceEntityRepository
     // /**
     //  * @return EspaceDeCoworking[] Returns an array of EspaceDeCoworking objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+
+    public function SearchEspace($criteria)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.ville = :villeName')
+            ->setParameter('villeName', $criteria['ville'])
+            ->andWhere('v.prix <= :prix')
+            ->setParameter('prix', $criteria['prix'])
+            ->andWhere('v.imprimante = :imprimante')
+            ->setParameter('imprimante', $criteria['imprimante'])
+            ->andWhere('v.parking = :parking')
+            ->setParameter('parking', $criteria['parking'])
+            ->andWhere('v.cafe = :cafe')
+            ->setParameter('cafe', $criteria['cafe'])
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?EspaceDeCoworking

@@ -1,25 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheet %}
+
+<link href="/CSS/monCSS.css" rel="stylesheet">
+    
+<link href="/css/fontello.css" rel="stylesheet">
+
+{% endblock %}
 
 {% block body %}
-    <div class = "jumbotron">
-        <div class = "container">
-        {{ form_start (form)}}
-        <dic class="form_row">
-            <div class = "col">
-            {{ form_row(form.maxPrice)}}
-            </div>
-            <div class="col">
-            {{ form_row(form.horaire)}}
-            </div>
-            <div class="col">
-            <button class="btn btn-primary"> Rechercher </button>
-            </div>            
-        </div>
-        {{ form_end (form)}}
+
     <div class="container">
             <div class="list" >
-                {% for coworking in espaceDeCoworking %}
+                {% for coworking in espace %}
                     <div class="item js-marker" data-lat="{{coworking.lat}}" data-lng="{{coworking.longitude}}" data-price="{{coworking.prix}}">
                         <a href={{path("detailsRecherche",{id:coworking.id})}}>
                             <img src="{{coworking.url}}" width = "400" height = "260" alt="">

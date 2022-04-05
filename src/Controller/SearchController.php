@@ -47,12 +47,20 @@ class SearchController extends AbstractController
     /**
      * @Route("/espace/search", name="search_espace")
      */
-    public function searchEspace(Request $request): Response
+    public function searchEspace(Request $request, EspaceDeCoworkingRepository $espaceRepository): Response
     {
         $searchEspaceForm = $this->createForm(SearchEspaceType::class);
 
         $vueFormulaireRecherche=$searchEspaceForm->createView();
 
+        if($searchEspaceForm->handleRequest($request)->isSubmitted() && $searchEspaceForm->isValid())
+        {
+            $criteria = $searchEspaceForm->getData();
+            
+            $espaces = $espaceRepository->SearchEspace($criteria);
+
+            return $this -> redirectToRoute('resultatRecherche',['espace' => $espaces]);
+        }
 
         return $this->render('search/espace.html.twig', ['search_form'=>$vueFormulaireRecherche]);
     }

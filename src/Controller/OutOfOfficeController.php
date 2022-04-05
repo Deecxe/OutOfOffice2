@@ -36,6 +36,7 @@ use App\Form\UserModifType;
 use App\Form\Reservation1Type;
 use App\Form\EspaceSearchType;
 use App\Form\PaiementType;
+use App\Form\SearchEspaceType;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -56,26 +57,42 @@ class OutOfOfficeController extends AbstractController
         ]);
     }
 
-    //--------------------------Résultats recherche--------------------------------------
+    //--------------------------Recherche--------------------------------------
     /**
-     * @Route("/resultatRecherche", name="resultatRecherche")
+     * @Route("/recherche", name="Recherche")
      */
-    public function resultatRecherche(EspaceDeCoworkingRepository $repository, Request $request): Response
-    {
-        $search = new EspaceSearch();
-        $form = $this->createForm(EspaceSearchType::class, $search);
-        $form-> handleRequest($request);
-        $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
 
-        
-        $espaceDeCoworkings = $repositoryEspaceDeCoworking->findAll();
+    public function recherche(Request $request, EspaceDeCoworkingRepository $espaceRepository): Response
+    {
+        $searchEspaceForm = $this->createForm(SearchEspaceType::class);
+
+        $vueFormulaireRecherche=$searchEspaceForm->createView();
+
+        if($searchEspaceForm->handleRequest($request)->isSubmitted() && $searchEspaceForm->isValid())
+        {
+            $criteria = $searchEspaceForm->getData();
+            
+            $espaces = $espaceRepository->SearchEspace($criteria);
+
+            return $this -> render('out_of_office/resultatRecherche.html.twig',['espace' => $espaces]);
+        }
+
+        return $this->render('search/espace.html.twig', ['search_form'=>$vueFormulaireRecherche]);
+    }
+
+    //--------------------------Resultat Recherche--------------------------------------
+    /**
+     * @Route("/recherche/resultatRecherche", name="resultatRecherche")
+     */
+    public function resultatRecherche(EspaceDeCoworking $espaceDeCoworking): Response
+    {
     
-        return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworkings, 'form' => $form->createView()]);
+        return $this->render('out_of_office/detailsRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworking]);
     }
 
     //--------------------------Détails recherche--------------------------------------
     /**
-     * @Route("/resultatRecherche/detailsRecherche/{id}", name="detailsRecherche")
+     * @Route("/recherche/resultatRecherche/detailsRecherche/{id}", name="detailsRecherche")
      */
     public function detailsRecherche(EspaceDeCoworking $espaceDeCoworking): Response
     {
