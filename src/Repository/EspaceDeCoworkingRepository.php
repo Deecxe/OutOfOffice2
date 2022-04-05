@@ -10,6 +10,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
+
+
 
 /**
  * @method EspaceDeCoworking|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,6 +37,26 @@ class EspaceDeCoworkingRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+        private function findVisibleQuery(): QueryBuilder
+    {
+      
+        return $this->createQueryBuilder('e');
+              
+    }
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(EspaceSearch $search): Query
+    {
+        $query = $this->findVisibleQuery();
+        if ($search->getMaxPrice()){
+            $query = $query 
+                    -> where('e.prix <= :maxprice')
+                    -> setParameter('maxprice', $search->getMaxPrice());
+        }
+        return $query->getQuery();
     }
 
     /**

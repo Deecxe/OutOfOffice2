@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Doctrine\ORM\QueryBuilder;
+
 
 use App\Entity\EspaceDeCoworking;
 use App\Entity\User;
@@ -23,6 +25,7 @@ use App\Repository\EspaceDeCoworkingRepository;
 use App\Repository\UserRepository;
 use App\Repository\ReservationRepository;
 
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -58,15 +61,20 @@ class OutOfOfficeController extends AbstractController
     //--------------------------Résultats recherche--------------------------------------
     /**
      * @Route("/resultatRecherche", name="resultatRecherche")
+     * @param EspaceDeCoworkingRepository $repository
+     * @return Response
      */
-    public function resultatRecherche(Request $request): Response
+    public function resultatRecherche(EspaceDeCoworkingRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $search = new EspaceSearch();
         $form = $this->createForm(EspaceSearchType::class, $search);
         $form-> handleRequest($request);
         $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
+
         
-        $espaceDeCoworking = $repositoryEspaceDeCoworking->findAll();
+        $espaceDeCoworking = $paginator->paginate(
+            $this -> $repository -> findAllVisibleQuery($search)
+        );
     
         return $this->render('out_of_office/resultatRecherche.html.twig', ['espaceDeCoworking'=>$espaceDeCoworking, 'form' => $form->createView()]);
     }
