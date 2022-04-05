@@ -367,7 +367,7 @@ class EspaceDeCoworking
     }
     public function __toString()
     {
-        return $this->maxprice;
+        return $this->getTitre();
     }
 
     /**
