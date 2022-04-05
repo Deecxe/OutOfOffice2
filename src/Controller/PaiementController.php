@@ -45,10 +45,10 @@ class PaiementController extends AbstractController
 
             $facture = new Facture();
 
-            $facture->setIdUsers($user);
+            $facture->setIdUser($user);
             
             $reservations->getId();
-            $facture->setIdReservationn($reservations);
+            $facture->setIdReservation($reservations);
 
             $manager->persist($facture);
             $manager->flush();

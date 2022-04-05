@@ -27,16 +27,6 @@ class Facture
      */
     private $idUser;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="factures")
-     */
-    private $idReservationn;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="factures")
-     */
-    private $idUsers;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -66,30 +56,6 @@ class Facture
     public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    public function getIdReservationn(): ?Reservation
-    {
-        return $this->idReservationn;
-    }
-
-    public function setIdReservationn(?Reservation $idReservationn): self
-    {
-        $this->idReservationn = $idReservationn;
-
-        return $this;
-    }
-
-    public function getIdUsers(): ?User
-    {
-        return $this->idUsers;
-    }
-
-    public function setIdUsers(?User $idUsers): self
-    {
-        $this->idUsers = $idUsers;
 
         return $this;
     }

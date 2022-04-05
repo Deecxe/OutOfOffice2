@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,16 +51,6 @@ class Reservation
      * @ORM\ManyToOne(targetEntity=EspaceDeCoworking::class, inversedBy="reservations")
      */
     private $idEspace;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="idReservationn")
-     */
-    private $factures;
-
-    public function __construct()
-    {
-        $this->factures = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -155,35 +143,5 @@ class Reservation
     public function __toString()
     {
         return $this->getId();
-    }
-
-    /**
-     * @return Collection<int, Facture>
-     */
-    public function getFactures(): Collection
-    {
-        return $this->factures;
-    }
-
-    public function addFacture(Facture $facture): self
-    {
-        if (!$this->factures->contains($facture)) {
-            $this->factures[] = $facture;
-            $facture->setIdReservationn($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFacture(Facture $facture): self
-    {
-        if ($this->factures->removeElement($facture)) {
-            // set the owning side to null (unless already changed)
-            if ($facture->getIdReservationn() === $this) {
-                $facture->setIdReservationn(null);
-            }
-        }
-
-        return $this;
     }
 }
