@@ -1,3 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% for reservation in reservations %}
+
+{% endfor %}
 <center>
 <h3 class="titre">Paiement</h3>
 
@@ -17,3 +24,7 @@
 <input type="submit" />
 </form>
 </center>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

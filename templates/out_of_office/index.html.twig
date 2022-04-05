@@ -6,52 +6,78 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
+<center>
 <h1>
-Accueil 
+Bienvenue sur Out Of Office 
 </h1>
-<div class="slideshow-container">
+</center>
 
-  <div class="mySlides fade">
-    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-1.jpg" style="width:100%">
-  </div>
 
-  <div class="mySlides fade">
-    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-2.jpg" style="width:100%">
-  </div>
+<div class="slideshow">
 
-  <div class="mySlides fade">
-    <img src="https://www.pierre-giraud.com/bootstrap-carrousel-slide-3.jpg" style="width:100%">
-  </div>
+<style>
+.slideshow {
 
-</div>
-<br>
+   width: 1920px;
 
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-</div>
+   height: 800px;
 
-<script>
-var slideIndex = 0;
-showSlides();
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
+   overflow: hidden;
+
+   border: 3px solid #F2F2F2;
+
 }
+
+.slideshow ul {
+
+    /* 3 images donc 4 x 100% */
+
+   width: 300%;
+
+   height: 800px;
+
+   padding:0; margin:0;
+
+   list-style: none;
+
+}
+
+.slideshow li {
+
+   float: left;
+
+}</style>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+   $(function(){
+
+      setInterval(function(){
+
+         $(".slideshow ul").animate({marginLeft:-1970},800,function(){
+
+            $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
+
+         })
+
+      }, 3500);
+
+   });
+
 </script>
+
+<ul>
+{% for espace in espaceDeCoworkings %}
+
+  <li><img src="{{espace.url}}" alt="" width="1920" height="800" /></li> 
+
+{% endfor %}
+</ul>
+
+</div>
+
+
 
 {% endblock %}
