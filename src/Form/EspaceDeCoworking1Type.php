@@ -22,12 +22,11 @@ class EspaceDeCoworking1Type extends AbstractType
     {
         $builder
             ->add('url')
-            ->add('imageFile', FileType::class,[
-                'required' => false
-            ])
             ->add('titre')
             ->add('prix')
             ->add('adresse')
+            ->add('ville')
+            ->add('CodePostal')
             ->add('descriptif')
             ->add('imprimante')
             ->add('parking')

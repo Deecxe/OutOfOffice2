@@ -27,18 +27,6 @@ class EspaceDeCoworking
     private $id;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255)
-     */
-    private $filename;
-
-    /**
-     * @var File|null
-     * @Vich\UploadableField(mapping="espace_image", fileNameProperty="filename")
-     */
-    private $imageFile;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank;
      */
@@ -61,7 +49,6 @@ class EspaceDeCoworking
      * @Assert\NotBlank;
      * @Assert\Regex(pattern="#^[1-999]( )?(bis)?#", message="Le numéro de route semble incorrect");
      * @Assert\Regex(pattern="#rue|boulevard|avenue|impasse|allée|place|voie|allee|chemin#i",message="Le type de voie/rue semble incorrect");
-     * @Assert\Regex(pattern="#[0-9]{5}#",message="Il semble y avoir un probleme avec le code postal");
      */
     private $adresse;
 
@@ -132,6 +119,16 @@ class EspaceDeCoworking
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="espaceDeCoworkings")
      */
     private $idUser;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $CodePostal;
 
     public function __construct()
     {
@@ -402,6 +399,30 @@ class EspaceDeCoworking
     public function setImageFile(?File $imageFile): EspaceDeCoworking
     {
         $this->imageFile = $imageFile;
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?int
+    {
+        return $this->CodePostal;
+    }
+
+    public function setCodePostal(int $CodePostal): self
+    {
+        $this->CodePostal = $CodePostal;
+
         return $this;
     }
     
