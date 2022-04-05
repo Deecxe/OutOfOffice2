@@ -38,6 +38,17 @@ class EspaceDeCoworkingRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+    /**
+     * @return EspaceDeCoworking[]
+     */
+    public function findLast(): array
+    {
+        return $this->createQueryBuilder('e')
+        ->orderBy('e.id','DESC')
+        ->setMaxResults(4)
+        ->getQuery()
+        ->getResult();
+    }
 
         private function findVisibleQuery(): QueryBuilder
     {

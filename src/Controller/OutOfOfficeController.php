@@ -51,7 +51,9 @@ class OutOfOfficeController extends AbstractController
      */
     public function index(EspaceDeCoworkingRepository $repositoryEspaceDeCoworking): Response
     {
-        $espaceDeCoworkings = $repositoryEspaceDeCoworking->findAll();
+        $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
+
+        $espaceDeCoworkings = $repositoryEspaceDeCoworking->findLast();
 
         return $this->render('out_of_office/index.html.twig',['espaceDeCoworkings'=>$espaceDeCoworkings   
         ]);
