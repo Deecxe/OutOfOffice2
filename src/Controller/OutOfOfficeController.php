@@ -46,15 +46,11 @@ class OutOfOfficeController extends AbstractController
     /**
      * @Route("/", name="Accueil")
      */
-    public function index(): Response
+    public function index(EspaceDeCoworkingRepository $repositoryEspaceDeCoworking): Response
     {
+        $espaceDeCoworkings = $repositoryEspaceDeCoworking->findAll();
 
-
-        $repositoryEspaceDeCoworking = $this->getDoctrine()->getRepository(EspaceDeCoworking::class);
-
-        $espaceDeCoworking = $repositoryEspaceDeCoworking->findAll();
-
-        return $this->render('out_of_office/index.html.twig',['espaceDeCoworking'=>$espaceDeCoworking   
+        return $this->render('out_of_office/index.html.twig',['espaceDeCoworkings'=>$espaceDeCoworkings   
         ]);
     }
 
@@ -158,6 +154,8 @@ class OutOfOfficeController extends AbstractController
         {
             $espace->setIdUser($user);
             $espace->setNombrePlaceLibre($espace->getNombrePlace());
+            $adresse = $espace->getAdresse();
+            "https://api-adresse.data.gouv.fr/search/?q=".$adresse."";
             $manager->persist($espace);
             $manager->flush();
             return $this -> redirectToRoute('Accueil');
@@ -280,12 +278,13 @@ class OutOfOfficeController extends AbstractController
             $reservations->setIdEspace($espaceDeCoworking);
 
             $prix = $espaceDeCoworking->getPrix();
-            $reservations->setCout($prix);
+            $nbPlace = $reservations->getNombrePlaceReservees();
+            $reservations->setCout($prix*$nbPlace);
 
             $manager->persist($reservations);
             $manager->flush();
 
-            return $this -> redirectToRoute('Accueil');
+            return $this->render('out_of_office/paiement.html.twig', ['controller_name' => 'MetierController','espaceDeCoworking'=>$espaceDeCoworking,'reservation'=>$reservations]);
         }
 
 
@@ -294,3 +293,4 @@ class OutOfOfficeController extends AbstractController
         return $this->render('out_of_office/ajoutReservation.html.twig', ['controller_name' => 'MetierController','vueFormulaire'=> $vueFormulaireReservation,'espaceDeCoworking'=>$espaceDeCoworking]);
     }
 }
+?>
